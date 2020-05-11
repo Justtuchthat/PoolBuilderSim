@@ -1,0 +1,105 @@
+This is a file for used to keep all the gameplay elements I want to put in PoolBuildingSim
+
+
+Update names:
+V1: pools unleashed
+V2: Food time
+V3: Pumpy mcPumpface
+V4: I call it the suislide
+
+building:
+-pools:
+	((Version 1.0))
+	-open air pools
+		-cheaper to build and maintain
+		-has to close down in winter
+	-closed air pools
+		-more costly to build and maintain
+		-can keep running all year
+	((Version 3.0))
+	-water streams
+		-more people atracted
+		-needs water pump(s)
+	-bubble baths
+		-few people can fit
+		-needs air pump(s)
+	((Version 4.0))
+	-slides
+		-more people atracted
+		-needs water pump(s)
+
+-utility buildings:
+	((Version 1.0))
+	-power delevery
+		-lower power bill
+		-costs for maintaining go up
+	-water purification
+		-lower water bill
+		-costs for maintaining go up
+	-toilets
+		-required or people pee in the pools
+	((Version 2.0))
+	-food stand
+		-feed guests
+		-needs sales stand staff
+		-generates income from sales
+	-snack machine
+		-needs restocking
+		-needs restocking clerk
+		-uses electricity
+	-soda dispenser
+		-needs restocking
+		-needs restocking clerk
+		-uses electricity
+	((Version 3.0))
+	-water pump
+		-can build water streams
+		-higher maintenance costs
+		-(V4)can build slides
+	-air pump
+		-can build bubble baths
+		-higher maintenance costs
+
+-staff
+	((Version 1.0))
+	-staff room/lunch room
+		-staff will need this
+	-hiring office
+		-more options when hiring
+	-hr office
+		-set longer working times
+		-set salary higher/lower
+	-cantine
+		-can feed staff
+		-costs more in maintenance
+		-(V2) costs more in food imports
+		-needs cook
+
+staff sorts:
+((version 1.0))
+-pool guard
+	-needs at least 1 per pool
+	-high salary
+-pool cleaner
+	-needs enough to keep pool clean
+	-open air pools need more cleaning
+	-low salary
+-janitor
+	-keeps buildings clean
+	-closed air pools need more cleaning
+	-needed to keep toilets clean
+	-medium salary
+-mechanic
+	-keep utility buildings running
+	-high salary
+((Version 2.0))
+-sales stand staff
+	-needed to sell stuff
+	-low salary
+-restocking clerk
+	-needed to restock soda and snack machines
+	-low salary
+((Version 4.0))
+-slide supervisor
+	-needed to run slides
+	-medium salary
