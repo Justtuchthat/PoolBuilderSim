@@ -12,10 +12,10 @@ building:
 	((Version 1.0))
 	-open air pools
 		-cheaper to build and maintain
-		-has to close down in winter
+		-less atraction in cold temp
 	-closed air pools
 		-more costly to build and maintain
-		-can keep running all year
+		-avarege atraction all round
 	((Version 3.0))
 	-water streams
 		-more people atracted
