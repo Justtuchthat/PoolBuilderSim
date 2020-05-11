@@ -1,0 +1,78 @@
+This file is used to plan out what versions get what 
+
+any version followed by a B (aka: V2B) means it is an in bnetween update and not the final release.
+any subversion on updates (aka: V2B.4) mean it brings out more features
+any subversion added onto that (aka: V2B.4.7) will be used to show bug fixes
+
+Version 1
+-V1B:
+	this pre-build will be used for developing Version 1.0
+	-V1B.0
+		-obligatory "Hello World!" file
+	-V1B.1
+		-adding scrolling the screen
+		-create button class
+		-create menu possibility
+		-create class that will make getting keyboard input easier
+	-V1B.2
+		-add possibility for multiple viewing modes
+		-add a build mode and beeing able to build "Blocks"
+	-V1B.3
+		-add money
+		-building will cost money
+		-adding foundation blocks, wall blocks and 2 pool blocks
+	-V1B.3
+		-add saving feature
+		-add main menu for loading saves
+	-V1B.4
+		-add utility usage
+		-add water purification plant
+		-add power delevery plant
+	-V1B.5
+		-people like little blobs
+		-more people = more moneyz
+		-staff in different colored blobs
+		-make different staff functions possible
+	-V1B.6
+		-make staff required to run possible
+		-add pool guard staff funtion
+		-add pool cleaner
+		-add mechanic
+	-V1B.7
+		-staff room and furniture
+		-staff needs staff room
+	-V1B.8
+		-add toilet
+		-add pool cleanliness
+		-no toilet means pool will get dirty quicker
+	-V1B.9
+		-staff will cost money
+		-add hiring of staff
+		-add hr office
+
+Version 2
+-V2B
+	this pre-build will be used for developing Version 2.0
+	-V2B.1
+		-add food variable
+		-add drinks variable
+	-V2B.2
+		-snack machine
+		-add soda dispenser
+		-snack amchine generates income
+		-soda dispenser generates income
+	-V2B.3
+		-add sales stand staff
+		-add restock clerk
+		-food and drinks cost money
+	-V2B.4
+		-add food stand
+		-add cantine
+
+Version 3
+-V3B
+	This pre-build will be used for developing Version 3.0
+
+Version 4
+-V4B
+	This pre-build will be used for developing Version 4.0
