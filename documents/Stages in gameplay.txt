@@ -21,6 +21,7 @@ Version 1
 		-add money
 		-building will cost money
 		-adding foundation blocks, wall blocks and 2 pool blocks
+		-make same blocks connect
 	-V1B.3
 		-add saving feature
 		-add main menu for loading saves
@@ -28,11 +29,18 @@ Version 1
 		-add utility usage
 		-add water purification plant
 		-add power delevery plant
+		-add water capacity
+		-add electricity capacity
+		-all buildings drain the required capacity
+		-plants, powernet and waternet fill capacity
+		-can open special buildings and enter menu
+		-can open menu for viewing all net capacities
 	-V1B.5
-		-people like little blobs
-		-more people = more moneyz
+		-add people like little blobs
+		-add people atractedness
 		-staff in different colored blobs
 		-make different staff functions possible
+		-add ability to assign staff to special buildings
 	-V1B.6
 		-make staff required to run possible
 		-add pool guard staff funtion
@@ -72,7 +80,43 @@ Version 2
 Version 3
 -V3B
 	This pre-build will be used for developing Version 3.0
+	-V3B.1
+		-add water pump
+		-add air pump
+		-add air pump capacity
+		-add water pump capacity
+		-add water capacity
+	-V3B.2
+		-add water stream
+		-add bubble bath
+		-add high presure water capacity
+		-add high presure air capacity
+		-water pump fills high presure water capacity
+		-air pump fills high preusre air capacity
+	-V3B.3
+		-add pipe connection mode
+		-all swimming pools need water connected
+		-swimming pool requires water capacity
+	-V3B.4
+		-water stream needs water pump connected
+		-water pump needs water connected
+		-bubble bath needs air pump connected
+	-V3B.5
+		-add simple "AI" to blob people
+		-add going into stream to "AI"
+		-add swimming to "AI"
+		-add eating to "AI"
 
 Version 4
 -V4B
 	This pre-build will be used for developing Version 4.0
+	-V4B.1
+		-add slide building
+		-add going down slide to "AI"
+	-V4B.2
+		-add slide supervisor
+		-slide will only work with slide supervisor
+		-slide needs water pump connected
+		-slide drains high presure water capacity
+		-to little high presure water capacity turns off highest buildings first
+		
