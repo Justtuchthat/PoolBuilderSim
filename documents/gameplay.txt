@@ -69,10 +69,11 @@ building:
 	-hr office
 		-set longer working times
 		-set salary higher/lower
+	((Version 2.0))
 	-cantine
 		-can feed staff
 		-costs more in maintenance
-		-(V2) costs more in food imports
+		-costs more in food imports
 		-needs cook
 
 staff sorts:
