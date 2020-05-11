@@ -1,0 +1,82 @@
+inflows:
+	money:
+		-every person on site adds money per second
+		-every food and drink sold adds money
+	
+	water:
+		-water from the water mains adds infinite water
+		-water purification plants, bigger size adds more water
+		
+	electricity:
+		-power mains add infinite electricity
+		-electricity deleviry plant imports energy freely, bigger plants have more capacity
+		
+	food:
+		-food has to be set to be bought at the begining of the day
+		
+	drinks:
+		-drinks have to be set to be bought at the begining of the day
+		
+	high presure water:
+		-water pumps add high presure water capacity, bigger buildings add more
+		
+	high presure air:
+		-air pumps add high presure air capacity, bigger buildings add more
+	
+	people:
+		-higher intrest:
+			-more pool spaces
+			-more pool cleanliness
+			-more food
+			-more drinks
+			-total length of water streams
+			-more bubble baths
+			-outside pool in warm temps
+			-total length of slides
+	
+outflows:
+	money:
+		-building stuff
+		-staff salaries
+		-importing from mains costs per capacity used
+		-buying food costs per food amount, buying in bulk gives reduced price
+		-buying drinks costs per drink volume, buying in bulk gives reduced price
+		-maintenance
+		
+	water:
+		-pools
+		-toilets
+		-water pumps
+		
+	electricity:
+		-buildings->bigger means more consumed
+		-water pump
+		-air pump
+		-snack machine
+		-soda dispenser
+		-food stand
+		-water purification plant
+		
+	food:
+		-food stand
+		-snack machine
+		
+	drinks:
+		-soda dispenser
+		
+	high presure water:
+		-slides
+		-water streams
+		
+	high presure air:
+		-bubble baths
+		
+	people:
+		-lower intrest:
+			-dirty pools
+			-no food options
+			-no drink options
+			-outside pool in cold temp
+			-no bubble bath
+			-no water streams
+			-no slides
