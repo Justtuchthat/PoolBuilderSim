@@ -38,6 +38,10 @@ building:
 		-costs for maintaining go up
 	-toilets
 		-required or people pee in the pools
+	-showers
+		-required or people drag dirt into pool
+	-clothing cabins
+		-required for people to un- and re-dress
 	((Version 2.0))
 	-food stand
 		-feed guests

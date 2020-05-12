@@ -22,10 +22,13 @@ Version 1
 		-building will cost money
 		-adding foundation blocks, wall blocks and 2 pool blocks
 		-make same blocks connect
-	-V1B.3
+	-V1B.4
 		-add saving feature
 		-add main menu for loading saves
-	-V1B.4
+		-add settings menu
+		-add seasons
+		-add warm, cold and medium temps
+	-V1B.5
 		-add water purification plant
 		-add power delevery plant
 		-add water capacity
@@ -33,28 +36,34 @@ Version 1
 		-add utility usage
 		-can open special buildings and enter menu
 		-can open menu for viewing all net capacities
-	-V1B.5
+	-V1B.6
 		-add people like little blobs
 		-add people atractedness
 		-staff in different colored blobs
 		-make different staff functions possible
 		-add ability to assign staff to special buildings
-	-V1B.6
+	-V1B.7
 		-make staff required to run possible
 		-add pool guard staff funtion
 		-add pool cleaner
 		-add mechanic
-	-V1B.7
-		-staff room and furniture
-		-staff needs staff room
 	-V1B.8
+		-add staff room and furniture
+		-add staff needs staff room
+	-V1B.9
 		-add toilet
 		-add pool cleanliness
 		-no toilet means pool will get dirty quicker
-	-V1B.9
+	-V1B.10
 		-staff will cost money
 		-add hiring of staff
+		-add hiring office
 		-add hr office
+	-V1B.11
+		-add showers
+		-add clothing cabins
+		-no showers means that outside dirt is dragged inside
+		-no clothing cabins means no people
 
 Version 2
 -V2B
@@ -65,7 +74,7 @@ Version 2
 	-V2B.2
 		-snack machine
 		-add soda dispenser
-		-snack amchine generates income
+		-snack machine generates income
 		-soda dispenser generates income
 	-V2B.3
 		-add sales stand staff
