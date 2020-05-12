@@ -62,8 +62,12 @@ Version 1
 	-V1B.11
 		-add showers
 		-add clothing cabins
-		-no showers means that outside dirt is dragged inside
+		-no showers means dirtier pools
 		-no clothing cabins means no people
+	-V1B.12
+		-add ticket stand
+		-add ticket checker staff function
+		-no ticket stand means people do not generate money
 
 Version 2
 -V2B
