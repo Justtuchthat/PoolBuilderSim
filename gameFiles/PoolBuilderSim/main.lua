@@ -1,7 +1,7 @@
 -- main.lua
 -- created by Justtuchthat
 -- first created on 10-8-2020
--- last edited on 11-09-2020
+-- last edited on 12-09-2020
 -- this is used to start the game
 
 testPoolEdgeMode = true
@@ -20,6 +20,7 @@ require("movementSetup")
 require("settingsSetup")
 require("buttonClass")
 require("helperFunctions")
+require("modeManager")
 if testPoolEdgeMode then
 	require("testPoolEdge")
 end
@@ -28,19 +29,19 @@ function testButton()
 	print("Hello World!")
 end
 
+function setupModes()
+  addMode("nothing")
+  addMode("play")
+	addMode("test1")
+	addMode("test2")
+  changeMode("play")
+end
+
 button = newButton("text", newLocationObject(100, 100), "This is a test", {1, 1, 1})
 button.pressAction:addFunction(testButton)
-
-function addSquarePool(beginX, beginY, endX, endY)
-	poolCell = newGameCell()
-	poolCell.type = "pool"
-	for x = beginX, endX do
-		for y = beginY, endY do
-			gameworld[y][x] = poolCell
-		end
-	end
-	gameworld = checkPoolEdges(gameworld)
-end
+setupModes()
+modes.play.buttons:addButton(button)
+modes.play.draw:addFunction(renderGame)
 
 function love.load()
 	gameworld = initGame(gameWorldSize)
@@ -59,9 +60,7 @@ function love.load()
 end
 
 function love.draw()
-	width, height, _ = love.window.getMode()
-	renderGame(drawOffsetX, drawOffsetY, squareSize, gameworld)
-	renderButtons()
+	modeDraw()
 end
 
 function love.update()
