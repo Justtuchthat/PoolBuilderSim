@@ -1,7 +1,7 @@
 -- testPoolEdge.lua
 -- created by Justtuchthat
 -- first created on 10-09-2020
--- last edited on 11-09-2020
+-- last edited on 15-09-2020
 -- this is used to test all pool edges
 
 local previousCellType = "grassCell"
@@ -33,7 +33,7 @@ function mouseDownCellEdit(_, mouse)
 	gameworld = checkPoolEdges(gameworld)
 end
 
-function setupMouseCode()
+function setupMouseCodeTestPoolEdge()
   mouse.button[1].pressAction:addFunction(mouseDownCellEdit)
   mouse.button[1].releaseAction:addFunction(mouseReleaseCellEdit)
   mouse.moveAction:addFunction(mouseMoveCellEdit)

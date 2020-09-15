@@ -1,7 +1,7 @@
 -- buttonClass.lua
 -- created by Justtuchthat
 -- first created on 10-09-2020
--- last edited on 12-09-2020
+-- last edited on 15-09-2020
 -- this is the class that will contain all buttons
 
 allButtons = {}
@@ -10,7 +10,8 @@ function newButton(type, loc, face, color)
   if not type then love.errhand("No button Type when creating button") end
   if not loc then love.errhand("No button location when creating button") end
   if not face then love.errhand("No button face when creating button") end
-  newButton = {}
+  mode = mode or "topLeft"
+  local newButton = {}
   newButton.type = type
   newButton.loc = loc
   newButton.disabled = true
@@ -24,7 +25,7 @@ function newButton(type, loc, face, color)
     newButton.face = love.graphics.newImage(face)
     newButton.size.x, newButton.size.y = newButton.face:getDimensions()
   else
-    love.errhand("Wrong button type : " .. tostring(type))
+    love.errhand("Wrong button type : " .. type)
   end
 
   newButton.pressAction = {}
@@ -57,6 +58,7 @@ local function mousePressForButtons(Keyboard, mouse)
       for i, Fn in ipairs(btn.pressAction) do
         Fn()
       end
+      return
     end
   end
 end

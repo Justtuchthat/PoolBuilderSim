@@ -23,3 +23,13 @@ function renderGame()
   end
   love.graphics.translate(-drawOffsetX, -drawOffsetY)
 end
+
+function buildMenu()
+  width, height, _ = love.window.getMode()
+  text = love.graphics.newText(love.graphics.getFont(), "BuildMode")
+  textWidth, textHeight = text:getDimensions()
+  love.graphics.setColor(1, 1, 1)
+  love.graphics.rectangle("fill", (width-textWidth)/2-2, 20, textWidth+4, textHeight, 2, 2)
+  love.graphics.setColor(0, 0, 0)
+  love.graphics.draw(text, (width-textWidth)/2, 20)
+end
