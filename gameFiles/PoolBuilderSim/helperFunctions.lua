@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 12-09-2020
+-- last edited on 04-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -29,5 +29,12 @@ function addSquarePool(beginX, beginY, endX, endY)
 			gameworld[y][x] = poolCell
 		end
 	end
-	gameworld = checkPoolEdges(gameworld)
+	checkPoolEdges(gameworld)
+end
+
+function getLocFromMouse(mouseX, mouseY)
+	mouseX = mouseX - drawOffsetX
+	mouseY = mouseY - drawOffsetY
+	loc = newLocationObject(math.floor(mouseX/8), math.floor(mouseY/8))
+	return loc
 end

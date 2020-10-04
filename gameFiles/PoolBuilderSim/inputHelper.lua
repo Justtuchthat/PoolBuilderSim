@@ -1,6 +1,6 @@
 -- inputHelper.lua
 -- created by Justtuchthat
--- last updated on 10-09-2020
+-- last updated on 04-10-2020
 -- this program should help with getting the input of keys on the keyboard
 
 Keyboard = {}
@@ -130,14 +130,4 @@ function love.wheelmoved(x, y)
 	for i, fn in ipairs(mouse.scrollAction) do
 		fn(Keyboard, mouse)
 	end
-end
-
-
-function getLocFromMouse(mouseX, mouseY)
-	mouseX = mouseX - drawOffsetX
-	mouseY = mouseY - drawOffsetY
-	loc = {}
-	loc.y = math.floor(mouseX/8)
-	loc.x = math.floor(mouseY/8)
-	return loc
 end

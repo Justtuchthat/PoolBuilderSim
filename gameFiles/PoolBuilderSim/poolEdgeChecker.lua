@@ -1,7 +1,7 @@
 -- poolEdgeChecker.lua
 -- created by Justtuchthat
 -- first created on 13-08-2020
--- last edited on 11-09-2020
+-- last edited on 04-10-2020
 -- this is used to create the pool edges
 
 local function isInBounds(x, y, gameworld)
@@ -34,10 +34,7 @@ function checkPoolEdges(gameworld)
           newCell.type = "poolEdge"
         end
         gameworld[x][y] = newCell
-      else
-
       end
     end
   end
-  return gameworld
 end
