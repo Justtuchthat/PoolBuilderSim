@@ -6,7 +6,7 @@
 
 allButtons = {}
 
-function newButton(type, loc, face, color)
+function newButton(type, loc, face, colorNormal, hoverOverColor)
   if not type then love.errhand("No button Type when creating button") end
   if not loc then love.errhand("No button location when creating button") end
   if not face then love.errhand("No button face when creating button") end
@@ -18,7 +18,9 @@ function newButton(type, loc, face, color)
   newButton.size = {}
   if type == "text" then
     newButton.face = love.graphics.newText(love.graphics.newFont(), face)
-    newButton.color = color
+    newButton.color = colorNormal
+    newButton.colorNormal = colorNormal
+    newButton.hoverOverColor = hoverOverColor
     newButton.size.x, newButton.size.y = newButton.face:getDimensions()
     newButton.size.x = newButton.size.x + 4
   elseif type == "image" then
@@ -63,8 +65,18 @@ local function mousePressForButtons(Keyboard, mouse)
   end
 end
 
+local function hoverOverColorHandler(Keyboard, mouse)
+  for i, btn in ipairs(allButtons) do
+    btn.color = btn.colorNormal
+    if (not btn.disabled) and btn:hasCursorInside(mouse) then
+      btn.color = btn.hoverOverColor
+    end
+  end
+end
+
 local function setupMouse()
   mouse.button[1].releaseAction:addFunction(mousePressForButtons)
+  mouse.moveAction:addFunction(hoverOverColorHandler)
 end
 
 function startButtonClass()

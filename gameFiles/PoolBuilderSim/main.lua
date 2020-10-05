@@ -1,7 +1,7 @@
 -- main.lua
 -- created by Justtuchthat
 -- first created on 10-8-2020
--- last edited on 04-10-2020
+-- last edited on 05-10-2020
 -- this is used to start the game
 
 testPoolEdgeMode = false
@@ -24,25 +24,9 @@ require("settingsSetup")
 require("buttonClass")
 require("helperFunctions")
 require("modeManager")
+require("buildTool")
 if testPoolEdgeMode then
 	require("testPoolEdge")
-end
-
-function buildPoolStart(_, mouse)
-	if currentMode == "build" then
-		buildLocStart = getLocFromMouse(mouse.x, mouse.y)
-	end
-end
-
-function buildPoolFinish(_, mouse)
-	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
-		loc = {}
-		loc.x, loc.y = getLocFromMouse(mouse.x, mouse.y)
-		addSquarePool(buildLocStart.x, buildLocStart.y, loc.x, loc.y)
-		buildLocStart.x = nil
-		buildLocStart.y = nil
-
-	end
 end
 
 function testButton()
@@ -52,7 +36,6 @@ end
 function setupModes()
   addMode("nothing")
   addMode("play")
-	addMode("build")
   changeMode("play")
 end
 
@@ -64,11 +47,10 @@ function love.load()
 	startButtonClass()
 	setupModes()
 	modes.play.draw:addFunction(renderGame)
-	modes.build.draw:addFunction(renderGame)
-	modes.build.draw:addFunction(buildMenu)
-	mouse.button[1].pressAction:addFunction(buildPoolStart)
-	mouse.button[1].releaseAction:addFunction(buildPoolFinish)
 	setupControls()
+
+	setupBuildMode()
+
 	windowSetup()
 
 	if testPoolEdgeMode then

@@ -1,7 +1,7 @@
 -- movementSetup.lua
 -- created by Justtuchthat
 -- first created on 16-08-2020
--- last edited on 15-09-2020
+-- last edited on 05-10-2020
 -- this is used to setup all the keys for movement
 
 local function mouseWheelMove(keyboard, mouse)
@@ -29,16 +29,6 @@ local function moveDown()
 	drawOffsetY = drawOffsetY - movementSpeed
 end
 
-function enterBuildMode()
-	changeMode("build")
-end
-
-function exitBuildMode()
-	if currentMode == "build" then
-		changeMode("play")
-	end
-end
-
 local function addKeyListeners()
 	Keyboard:addKeyListener('w')
 	Keyboard:addKeyListener('a')
@@ -49,7 +39,6 @@ local function addKeyListeners()
 	Keyboard:addKeyListener('down')
 	Keyboard:addKeyListener('right')
 	Keyboard:addKeyListener('lshift')
-	Keyboard:addKeyListener('escape')
 end
 
 local function connectKeysWithFunctions()
@@ -69,21 +58,14 @@ local function connectKeysWithFunctions()
 	Keyboard.down.continuePressActions:addFunction(moveDown)
 	Keyboard.right.firstPressActions:addFunction(moveRight)
 	Keyboard.right.continuePressActions:addFunction(moveRight)
-	Keyboard.escape.lastPressActions:addFunction(exitBuildMode)
 end
 
 local function addMouseScrolling()
 	mouse.scrollAction:addFunction(mouseWheelMove)
 end
 
-local function setupBuildModeButton()
-	buildButton = newButton("text", newLocationObject(20, 20), "build pool", {1, 1, 1})
-	buildButton.pressAction:addFunction(enterBuildMode)
-	modes.play.buttons:addButton(buildButton)
-end
-
 local function buttonsSetup()
-	setupBuildModeButton()
+	
 end
 
 function setupControls()

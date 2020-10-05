@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 04-10-2020
+-- last edited on 05-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -9,6 +9,11 @@ function newLocationObject(x, y)
   loc.x = x
   loc.y = y
   return loc
+end
+
+function minMax(a, b)
+  if a <= b then return a, b end
+  return b, a
 end
 
 function contains(table, var)
@@ -24,6 +29,8 @@ end
 function addSquarePool(beginX, beginY, endX, endY)
 	poolCell = newGameCell()
 	poolCell.type = "pool"
+  beginX, endX = minMax(beginX, endX)
+  beginY, endY = minMax(beginY, endY)
 	for x = beginX, endX do
 		for y = beginY, endY do
 			gameworld[y][x] = poolCell
