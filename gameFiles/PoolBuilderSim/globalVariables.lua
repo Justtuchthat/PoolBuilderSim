@@ -7,6 +7,8 @@
 
 testPoolEdgeMode = false
 
+gameWorldSize = 100
+
 drawOffsetX = 0
 drawOffsetY = 0
 squareSize = 8

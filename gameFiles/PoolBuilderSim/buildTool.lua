@@ -21,13 +21,25 @@ function buildPoolFinish(_, mouse)
 end
 
 function enterBuildMode()
-	changeMode("build")
+  changeMode("build")
 end
 
 function exitBuildMode()
 	if currentMode == "build" then
 		changeMode("play")
 	end
+end
+
+function drawGridLines()
+  love.graphics.translate(drawOffsetX, drawOffsetY)
+  love.graphics.setColor({0, 0, 0, 0.2})
+	for x = 1, gameWorldSize do
+    love.graphics.line(x*squareSize, 0, x*squareSize, (gameWorldSize+1)*squareSize)
+  end
+  for y = 1, gameWorldSize do
+    love.graphics.line(0, y*squareSize, (gameWorldSize+1)*squareSize, y*squareSize)
+  end
+  love.graphics.translate(-drawOffsetX, -drawOffsetY)
 end
 
 function drawSquareOverlay(startLoc, endLoc)
@@ -54,8 +66,9 @@ function setupBuildMode()
   addMode("build")
 
   modes.build.draw:addFunction(renderGame)
-	modes.build.draw:addFunction(buildMenu)
+  modes.build.draw:addFunction(drawGridLines)
   modes.build.draw:addFunction(drawBuildSelectionBox)
+  modes.build.draw:addFunction(buildMenu)
 
 	mouse.button[1].pressAction:addFunction(buildPoolStart)
 	mouse.button[1].releaseAction:addFunction(buildPoolFinish)
