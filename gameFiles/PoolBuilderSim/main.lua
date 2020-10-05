@@ -9,6 +9,9 @@ testPoolEdgeMode = false
 drawOffsetX = 0
 drawOffsetY = 0
 squareSize = 8
+buildLocStart = {}
+buildLocStart.x = nil
+buildLocStart.y = nil
 
 movementSpeed = 10
 
@@ -27,9 +30,18 @@ end
 
 function buildPoolStart(_, mouse)
 	if currentMode == "build" then
+		buildLocStart = getLocFromMouse(mouse.x, mouse.y)
+	end
+end
+
+function buildPoolFinish(_, mouse)
+	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
 		loc = {}
 		loc.x, loc.y = getLocFromMouse(mouse.x, mouse.y)
-		addSquarePool(loc.x, loc.y, loc.x, loc.y)
+		addSquarePool(buildLocStart.x, buildLocStart.y, loc.x, loc.y)
+		buildLocStart.x = nil
+		buildLocStart.y = nil
+
 	end
 end
 
@@ -55,6 +67,7 @@ function love.load()
 	modes.build.draw:addFunction(renderGame)
 	modes.build.draw:addFunction(buildMenu)
 	mouse.button[1].pressAction:addFunction(buildPoolStart)
+	mouse.button[1].releaseAction:addFunction(buildPoolFinish)
 	setupControls()
 	windowSetup()
 
