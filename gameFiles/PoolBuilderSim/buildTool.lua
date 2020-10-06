@@ -33,11 +33,11 @@ end
 function drawGridLines()
   love.graphics.translate(drawOffsetX, drawOffsetY)
   love.graphics.setColor({0, 0, 0, 0.2})
-	for x = 1, gameWorldSize do
-    love.graphics.line(x*squareSize, 0, x*squareSize, (gameWorldSize+1)*squareSize)
+	for x = 1, gameworldSize do
+    love.graphics.line(x*squareSize, 0, x*squareSize, (gameworldSize+1)*squareSize)
   end
-  for y = 1, gameWorldSize do
-    love.graphics.line(0, y*squareSize, (gameWorldSize+1)*squareSize, y*squareSize)
+  for y = 1, gameworldSize do
+    love.graphics.line(0, y*squareSize, (gameworldSize+1)*squareSize, y*squareSize)
   end
   love.graphics.translate(-drawOffsetX, -drawOffsetY)
 end

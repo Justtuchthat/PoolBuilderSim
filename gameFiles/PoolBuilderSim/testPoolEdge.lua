@@ -1,7 +1,7 @@
 -- testPoolEdge.lua
 -- created by Justtuchthat
 -- first created on 10-09-2020
--- last edited on 104-10-2020
+-- last edited on 04-10-2020
 -- this is used to test all pool edges
 
 local previousCellType = "grassCell"

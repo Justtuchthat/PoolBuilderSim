@@ -1,7 +1,7 @@
 -- poolEdgeChecker.lua
 -- created by Justtuchthat
 -- first created on 13-08-2020
--- last edited on 04-10-2020
+-- last edited on 06-10-2020
 -- this is used to create the pool edges
 
 local function isInBounds(x, y, gameworld)
@@ -10,14 +10,15 @@ local function isInBounds(x, y, gameworld)
   end
 end
 
-local function hasGrassNeigbour(x, y, gameworld)
+local function hasNonPoolNeighbours(x, y, gameworld)
   for xOff = -1, 1 do
     for yOff = -1, 1 do
       if isInBounds(x + xOff, y + yOff, gameworld) then
-        if gameworld[x+xOff][y+yOff].type == "pool" or gameworld[x+xOff][y+yOff].type == "poolEdge" then
-        else
+        if gameworld[x+xOff][y+yOff].type ~= "pool" and gameworld[x+xOff][y+yOff].type ~= "poolEdge" then
           return true
         end
+      else
+        return true
       end
     end
   end
@@ -30,7 +31,7 @@ function checkPoolEdges(gameworld)
       newCell = {}
       if cell.type == "pool" or cell.type == "poolEdge" then
         newCell.type = "pool"
-        if hasGrassNeigbour(x, y, gameworld) then
+        if hasNonPoolNeighbours(x, y, gameworld) then
           newCell.type = "poolEdge"
         end
         gameworld[x][y] = newCell
