@@ -1,7 +1,7 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 05-10-2020
+-- last edited on 06-10-2020
 -- this is used to build pools
 
 function buildPoolStart(_, mouse)
@@ -14,7 +14,7 @@ function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
 		loc = {}
 		loc.x, loc.y = getLocFromMouse(mouse.x, mouse.y)
-		addSquarePool(buildLocStart.x, buildLocStart.y, loc.x, loc.y)
+		buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y)
 		buildLocStart.x = nil
 		buildLocStart.y = nil
 	end

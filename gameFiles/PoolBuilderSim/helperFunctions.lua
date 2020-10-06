@@ -34,12 +34,13 @@ function contains(table, var)
   return nil
 end
 
-function addSquarePool(beginX, beginY, endX, endY)
+function buildSquareBuilding(beginX, beginY, endX, endY, type)
   beginX, endX = minMax(beginX, endX)
   beginY, endY = minMax(beginY, endY)
+  type = type or "grass"
 	for x = beginX, endX do
 		for y = beginY, endY do
-			setCellType(x, y, "pool")
+			setCellType(x, y, type)
 		end
 	end
 	checkPoolEdges(gameworld)
