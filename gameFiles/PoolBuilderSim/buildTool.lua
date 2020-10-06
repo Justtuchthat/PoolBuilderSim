@@ -4,8 +4,11 @@
 -- last edited on 06-10-2020
 -- this is used to build pools
 
+local currentBuildTile = "grass"
+
 function buildPoolStart(_, mouse)
-	if currentMode == "build" then
+	width, height, _ = love.window.getMode()
+	if currentMode == "build" and (mouse.x < width - 200) then
 		buildLocStart = getLocFromMouse(mouse.x, mouse.y)
 	end
 end
@@ -14,10 +17,18 @@ function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
 		loc = {}
 		loc.x, loc.y = getLocFromMouse(mouse.x, mouse.y)
-		buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y)
+		buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile)
 		buildLocStart.x = nil
 		buildLocStart.y = nil
 	end
+end
+
+function setBuildTilePool()
+	currentBuildTile = "pool"
+end
+
+function setBuildTileGrass()
+	currentBuildTile = "grass"
 end
 
 function enterBuildMode()
@@ -79,4 +90,13 @@ function setupBuildMode()
   buildButton = newButton("text", newLocationObject(20, 20), "build pool", {1, 1, 1}, {1, 1, 0})
   buildButton.pressAction:addFunction(enterBuildMode)
   modes.play.buttons:addButton(buildButton)
+
+	width, height, _ = love.window.getMode()
+
+	grassButton = newButton("text", newLocationObject(width-30, 20), "grass", {1, 1, 1}, {1, 1, 0})
+	poolButton = newButton("text", newLocationObject(width-30, 40), "pool", {1, 1, 1}, {1, 1, 0})
+	grassButton.pressAction:addFunction(setBuildTileGrass)
+	poolButton.pressAction:addFunction(setBuildTilePool)
+	modes.build.buttons:addButton(grassButton)
+	modes.build.buttons:addButton(poolButton)
 end
