@@ -5,7 +5,7 @@
 -- this is used to setup window settings
 
 function windowSetup()
-  windowSettings = {}
+  width, height, windowSettings = love.window.getMode()
   windowSettings.fullscreen = false
   windowSettings.fullscreentype = "desktop"
   windowSettings.vsync = true
@@ -16,5 +16,5 @@ function windowSetup()
   windowSettings.minwidth = 585
   windowSettings.minheight = 5
   windowSettings.highdpi = false
-  love.window.setMode(858, 480, windowSettings)
+  love.window.setMode(width, height, windowSettings)
 end

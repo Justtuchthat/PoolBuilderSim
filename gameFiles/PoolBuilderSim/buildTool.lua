@@ -33,6 +33,13 @@ end
 
 function enterBuildMode()
   changeMode("build")
+	resetColors()
+	if currentBuildTile == "grass" then
+		setGrassButtonColor()
+	end
+	if currentBuildTile == "pool" then
+		setPoolButtonColor()
+	end
 end
 
 function exitBuildMode()
@@ -73,6 +80,24 @@ function drawBuildSelectionBox()
   end
 end
 
+function relocateButtons(newWidth, newHeight)
+	poolButton.loc.x = newWidth-75
+	grassButton.loc.x = newWidth-75
+end
+
+function resetColors()
+	grassButton.colorNormal = {1, 1, 1}
+	poolButton.colorNormal = {1, 1, 1}
+end
+
+function setPoolButtonColor()
+	poolButton.colorNormal = {0.2, 0.8, 0.1}
+end
+
+function setGrassButtonColor()
+	grassButton.colorNormal = {0.2, 0.8, 0.1}
+end
+
 function setupBuildMode()
   addMode("build")
 
@@ -93,10 +118,18 @@ function setupBuildMode()
 
 	width, height, _ = love.window.getMode()
 
-	grassButton = newButton("text", newLocationObject(width-30, 20), "grass", {1, 1, 1}, {1, 1, 0})
-	poolButton = newButton("text", newLocationObject(width-30, 40), "pool", {1, 1, 1}, {1, 1, 0})
+	print(width)
+
+	grassButton = newButton("text", newLocationObject(width-75, 20), "grass", {1, 1, 1}, {1, 1, 0})
+	poolButton = newButton("text", newLocationObject(width-75, 40), "pool", {1, 1, 1}, {1, 1, 0})
 	grassButton.pressAction:addFunction(setBuildTileGrass)
 	poolButton.pressAction:addFunction(setBuildTilePool)
+	grassButton.pressAction:addFunction(resetColors)
+	poolButton.pressAction:addFunction(resetColors)
+	grassButton.pressAction:addFunction(setGrassButtonColor)
+	poolButton.pressAction:addFunction(setPoolButtonColor)
 	modes.build.buttons:addButton(grassButton)
 	modes.build.buttons:addButton(poolButton)
+
+	newResizeFunction(relocateButtons)
 end

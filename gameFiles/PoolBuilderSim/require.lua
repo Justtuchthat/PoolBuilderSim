@@ -17,6 +17,7 @@ require("modeManager")
 require("buildTool")
 require("globalVariables")
 require("startSetup")
+require("resize")
 if testPoolEdgeMode then
 	require("testPoolEdge")
 end
