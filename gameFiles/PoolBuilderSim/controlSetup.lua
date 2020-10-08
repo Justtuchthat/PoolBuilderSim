@@ -1,7 +1,7 @@
 -- movementSetup.lua
 -- created by Justtuchthat
 -- first created on 16-08-2020
--- last edited on 05-10-2020
+-- last edited on 08-10-2020
 -- this is used to setup all the keys for movement
 
 local function mouseWheelMove(keyboard, mouse)
@@ -15,6 +15,13 @@ end
 
 local function moveLeft()
 	drawOffsetX = drawOffsetX + movementSpeed
+end
+
+local function moveOnRightMouseButton(_, mouse)
+	if mouse.button[2].pressed then
+		drawOffsetX = drawOffsetX + mouse.dx
+		drawOffsetY = drawOffsetY + mouse.dy
+	end
 end
 
 local function moveRight()
@@ -65,7 +72,7 @@ local function addMouseScrolling()
 end
 
 local function buttonsSetup()
-	
+
 end
 
 function setupControls()
@@ -74,4 +81,5 @@ function setupControls()
 		buttonsSetup()
 
 		addMouseScrolling()
+		mouse.moveAction:addFunction(moveOnRightMouseButton)
 end
