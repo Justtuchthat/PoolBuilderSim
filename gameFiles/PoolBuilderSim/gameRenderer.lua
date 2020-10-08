@@ -1,7 +1,7 @@
 -- gameRenderer.lua
 -- created by Justtuchthat
 -- first created on 10-08-2020
--- last edited on 06-10-2020
+-- last edited on 08-10-2020
 -- this is used to render the game
 
 colorPicker = {}
@@ -26,12 +26,12 @@ end
 
 function buildMenu()
   width, height, _ = love.window.getMode()
-  text = love.graphics.newText(love.graphics.getFont(), "BuildMode (Press ESC to leave)")
+  text = love.graphics.newText(love.graphics.getFont(), "BuildMode")
   textWidth, textHeight = text:getDimensions()
   love.graphics.setColor(1, 1, 1)
   love.graphics.rectangle("fill", (width-textWidth)/2-2, 20, textWidth+4, textHeight, 2, 2)
   love.graphics.setColor(0, 0, 0)
   love.graphics.draw(text, (width-textWidth)/2, 20)
   love.graphics.setColor(0.7, 0.65, 0.35, 0.5)
-  love.graphics.rectangle("fill", width - 100, 0, 100, height)
+  love.graphics.rectangle("fill", width - buildMenuBoxWidth, 0, buildMenuBoxWidth, height)
 end

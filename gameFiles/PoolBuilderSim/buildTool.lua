@@ -1,14 +1,16 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 06-10-2020
+-- last edited on 08-10-2020
 -- this is used to build pools
+
+buildMenuBoxWidth = 110
 
 local currentBuildTile = "grass"
 
 function buildPoolStart(_, mouse)
 	width, height, _ = love.window.getMode()
-	if currentMode == "build" and (mouse.x < width - 200) then
+	if currentMode == "build" and (mouse.x < width - buildMenuBoxWidth) then
 		buildLocStart = getLocFromMouse(mouse.x, mouse.y)
 	end
 end
@@ -81,8 +83,10 @@ function drawBuildSelectionBox()
 end
 
 function relocateButtons(newWidth, newHeight)
-	poolButton.loc.x = newWidth-75
-	grassButton.loc.x = newWidth-75
+	exitBuildModeButton.loc.x = newWidth-100
+	poolButton.loc.x = newWidth-100
+	grassButton.loc.x = newWidth-100
+	buildButton.loc.x = newWidth-100
 end
 
 function resetColors()
@@ -109,25 +113,23 @@ function setupBuildMode()
 	mouse.button[1].pressAction:addFunction(buildPoolStart)
 	mouse.button[1].releaseAction:addFunction(buildPoolFinish)
 
-  Keyboard:addKeyListener('escape')
-  Keyboard.escape.lastPressActions:addFunction(exitBuildMode)
+  width, height, _ = love.window.getMode()
 
-  buildButton = newButton("text", newLocationObject(20, 20), "build pool", {1, 1, 1}, {1, 1, 0})
+  buildButton = newButton("text", newLocationObject(width - 50, 20), "build", {1, 1, 1}, {1, 1, 0})
   buildButton.pressAction:addFunction(enterBuildMode)
   modes.play.buttons:addButton(buildButton)
 
-	width, height, _ = love.window.getMode()
-
-	print(width)
-
-	grassButton = newButton("text", newLocationObject(width-75, 20), "grass", {1, 1, 1}, {1, 1, 0})
-	poolButton = newButton("text", newLocationObject(width-75, 40), "pool", {1, 1, 1}, {1, 1, 0})
+	exitBuildModeButton = newButton("text", newLocationObject(width-100, 20), "exit buildmode", {1, 0.8, 0.8}, {1, 0.2, 0.2})
+	grassButton = newButton("text", newLocationObject(width-100, 40), "grass", {1, 1, 1}, {1, 1, 0})
+	poolButton = newButton("text", newLocationObject(width-100, 60), "pool", {1, 1, 1}, {1, 1, 0})
+	exitBuildModeButton.pressAction:addFunction(exitBuildMode)
 	grassButton.pressAction:addFunction(setBuildTileGrass)
 	poolButton.pressAction:addFunction(setBuildTilePool)
 	grassButton.pressAction:addFunction(resetColors)
 	poolButton.pressAction:addFunction(resetColors)
 	grassButton.pressAction:addFunction(setGrassButtonColor)
 	poolButton.pressAction:addFunction(setPoolButtonColor)
+	modes.build.buttons:addButton(exitBuildModeButton)
 	modes.build.buttons:addButton(grassButton)
 	modes.build.buttons:addButton(poolButton)
 
