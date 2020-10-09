@@ -1,22 +1,16 @@
 -- gameRenderer.lua
 -- created by Justtuchthat
 -- first created on 10-08-2020
--- last edited on 08-10-2020
+-- last edited on 09-10-2020
 -- this is used to render the game
 
-colorPicker = {}
-colorPicker.grass = {0.1, 0.5, 0.05}
-colorPicker.errorCell = {1, 1, 0}
-colorPicker.pool = {0, 0, 1}
-colorPicker.poolEdge = {0.4, 0.4, 0.4}
-colorPicker.newCell = {1, 0, 0}
+errorCellColor = {1, 1, 0}
 
 function renderGame()
   love.graphics.translate(drawOffsetX, drawOffsetY)
   for y, xRow in ipairs(gameworld) do
     for x, cell in ipairs(xRow) do
-      color = colorPicker[cell.type]
-      color = color or colorPicker.errorCell
+      color = knownTiles[cell.type].color or errorCellColor
       love.graphics.setColor(color)
       love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
     end

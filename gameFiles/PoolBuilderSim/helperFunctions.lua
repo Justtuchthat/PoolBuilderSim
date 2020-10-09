@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 06-10-2020
+-- last edited on 09-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -9,14 +9,6 @@ function newLocationObject(x, y)
   loc.x = x
   loc.y = y
   return loc
-end
-
-function setCellType(x, y, newType)
-  if x < 1 then return end
-  if x > gameworldSize then return end
-  if y < 1 then return end
-  if y > gameworldSize then return end
-  gameworld[y][x].type = newType
 end
 
 function minMax(a, b)

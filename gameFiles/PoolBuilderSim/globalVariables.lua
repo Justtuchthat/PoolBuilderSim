@@ -6,6 +6,7 @@
 -- this is done to clean up the main file
 
 testPoolEdgeMode = false
+cheatingMode = true
 
 gameworldSize = 100
 

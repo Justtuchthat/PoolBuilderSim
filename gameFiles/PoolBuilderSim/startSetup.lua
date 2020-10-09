@@ -5,6 +5,7 @@
 -- this is used to start all classes
 
 function startClasses()
+  setupTiles()
   startMouse()
 	startButtonClass()
 	setupModes()
