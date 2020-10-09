@@ -19,6 +19,7 @@ require("globalVariables")
 require("startSetup")
 require("resize")
 require("tileHandler")
+require("currencyHandler")
 if testPoolEdgeMode then
 	require("testPoolEdge")
 end

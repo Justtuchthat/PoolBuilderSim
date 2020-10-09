@@ -75,10 +75,19 @@ function drawSquareOverlay(startLoc, endLoc)
   love.graphics.translate(-drawOffsetX, -drawOffsetY)
 end
 
+function drawBuildCost(start, End)
+	startX, endX = minMax(start.x, End.x)
+	startY, endY = minMax(start.y, End.y)
+	love.graphics.setColor(0.8, 0.8, 0.1)
+	buildCostText = love.graphics.newText(love.graphics.getFont(), "buildcost: " .. calculateBuildingCost(startX, startY, endX, endY, currentBuildTile))
+	love.graphics.draw(buildCostText, mouse.x, mouse.y)
+end
+
 function drawBuildSelectionBox()
   if buildLocStart.x and buildLocStart.y then
     loc = getLocFromMouse(mouse.x, mouse.y)
     drawSquareOverlay(buildLocStart, loc)
+		drawBuildCost(buildLocStart, loc)
   end
 end
 

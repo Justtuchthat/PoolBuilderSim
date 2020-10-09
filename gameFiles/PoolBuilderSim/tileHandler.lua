@@ -24,6 +24,11 @@ function setCellType(x, y, newType)
   gameworld[y][x].type = newType
 end
 
+function tilePrice(x, y)
+  tileType = gameworld[x][y].type
+  return knownTiles[tileType].buildCost
+end
+
 function setupTiles()
   newTile("grass", {0.1, 0.5, 0.05}, 0)
   newTile("pool", {0, 0, 1}, 10)
