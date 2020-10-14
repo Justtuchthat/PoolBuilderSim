@@ -1,24 +1,25 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 08-10-2020
+-- last edited on 14-10-2020
 -- this is used to build pools
 
 buildMenuBoxWidth = 110
 
 local currentBuildTile = "grass"
+local currentBuildCost = 0
 
 function buildPoolStart(_, mouse)
 	width, height, _ = love.window.getMode()
 	if currentMode == "build" and (mouse.x < width - buildMenuBoxWidth) then
-		buildLocStart = getLocFromMouse(mouse.x, mouse.y)
+		buildLocStart = screenToWorldSpace(mouse)
 	end
 end
 
 function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
 		loc = {}
-		loc.x, loc.y = getLocFromMouse(mouse.x, mouse.y)
+		loc.x, loc.y = screenToWorldSpace(mouse)
 		buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile)
 		buildLocStart.x = nil
 		buildLocStart.y = nil
@@ -79,13 +80,24 @@ function drawBuildCost(start, End)
 	startX, endX = minMax(start.x, End.x)
 	startY, endY = minMax(start.y, End.y)
 	love.graphics.setColor(0.8, 0.8, 0.1)
-	buildCostText = love.graphics.newText(love.graphics.getFont(), "buildcost: " .. calculateBuildingCost(startX, startY, endX, endY, currentBuildTile))
+	buildCostText = love.graphics.newText(love.graphics.getFont(), "buildcost: " .. currentBuildCost)
 	love.graphics.draw(buildCostText, mouse.x, mouse.y)
+end
+
+function recalculateBuildCost(_, mouse)
+	if not buildLocStart.x or not buildLocStart.y then
+		currentBuildCost = 0
+		return
+	end
+	loc = screenToWorldSpace(mouse)
+	startX, endX = minMax(buildLocStart.x, loc.x)
+	startY, endY = minMax(buildLocStart.y, loc.y)
+	currentBuildCost = calculateBuildingCost(startX, startY, endX, endY, currentBuildTile)
 end
 
 function drawBuildSelectionBox()
   if buildLocStart.x and buildLocStart.y then
-    loc = getLocFromMouse(mouse.x, mouse.y)
+    loc = screenToWorldSpace(mouse)
     drawSquareOverlay(buildLocStart, loc)
 		drawBuildCost(buildLocStart, loc)
   end
@@ -121,6 +133,7 @@ function setupBuildMode()
 
 	mouse.button[1].pressAction:addFunction(buildPoolStart)
 	mouse.button[1].releaseAction:addFunction(buildPoolFinish)
+	mouse.moveAction:addFunction(recalculateBuildCost)
 
   width, height, _ = love.window.getMode()
 

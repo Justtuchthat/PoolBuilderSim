@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 09-10-2020
+-- last edited on 14-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -9,6 +9,12 @@ function newLocationObject(x, y)
   loc.x = x
   loc.y = y
   return loc
+end
+
+function isInBounds(location)
+  if location.x < 1 or location.x > gameworldSize then return false end
+  if location.y < 1 or location.y > gameworldSize then return false end
+  return true
 end
 
 function minMax(a, b)
@@ -38,9 +44,9 @@ function buildSquareBuilding(beginX, beginY, endX, endY, type)
 	checkPoolEdges(gameworld)
 end
 
-function getLocFromMouse(mouseX, mouseY)
-	mouseX = mouseX - drawOffsetX
-	mouseY = mouseY - drawOffsetY
-	loc = newLocationObject(math.floor(mouseX/8), math.floor(mouseY/8))
+function screenToWorldSpace(location)
+	location.x = location.x - drawOffsetX
+	location.x = location.x - drawOffsetY
+	loc = newLocationObject(math.floor(location.x/8), math.floor(location.y/8))
 	return loc
 end
