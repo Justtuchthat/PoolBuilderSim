@@ -42,11 +42,8 @@ end
 function enterBuildMode()
   changeMode("build")
 	resetColors()
-	if currentBuildTile == "grass" then
-		setGrassButtonColor()
-	end
-	if currentBuildTile == "pool" then
-		setPoolButtonColor()
+	if knownTiles[currentBuildTile] and knownTiles[currentBuildTile].buildButton then
+		knownTiles[currentBuildTile].buildButton.colorNormal = {0.2, 0.8, 0.1}
 	end
 end
 
@@ -110,22 +107,18 @@ end
 
 function relocateButtons(newWidth, newHeight)
 	exitBuildModeButton.loc.x = newWidth-100
-	poolButton.loc.x = newWidth-100
-	grassButton.loc.x = newWidth-100
-	buildButton.loc.x = newWidth-100
 end
 
 function resetColors()
-	grassButton.colorNormal = {1, 1, 1}
-	poolButton.colorNormal = {1, 1, 1}
+	for i, tileName in ipairs(knownTiles) do
+		if knownTiles[tileName].buildButton then
+			knownTiles[tileName].buildButton.colorNormal = {1,1,1}
+		end
+	end
 end
 
-function setPoolButtonColor()
-	poolButton.colorNormal = {0.2, 0.8, 0.1}
-end
-
-function setGrassButtonColor()
-	grassButton.colorNormal = {0.2, 0.8, 0.1}
+function changeBuildTile(newTile)
+	currentBuildTile = newTile
 end
 
 function setupBuildMode()
@@ -147,18 +140,8 @@ function setupBuildMode()
   modes.play.buttons:addButton(buildButton)
 
 	exitBuildModeButton = newButton("text", newLocationObject(width-100, 20), "exit buildmode", {1, 0.8, 0.8}, {1, 0.2, 0.2})
-	grassButton = newButton("text", newLocationObject(width-100, 40), "grass", {1, 1, 1}, {1, 1, 0})
-	poolButton = newButton("text", newLocationObject(width-100, 60), "pool", {1, 1, 1}, {1, 1, 0})
 	exitBuildModeButton.pressAction:addFunction(exitBuildMode)
-	grassButton.pressAction:addFunction(setBuildTileGrass)
-	poolButton.pressAction:addFunction(setBuildTilePool)
-	grassButton.pressAction:addFunction(resetColors)
-	poolButton.pressAction:addFunction(resetColors)
-	grassButton.pressAction:addFunction(setGrassButtonColor)
-	poolButton.pressAction:addFunction(setPoolButtonColor)
 	modes.build.buttons:addButton(exitBuildModeButton)
-	modes.build.buttons:addButton(grassButton)
-	modes.build.buttons:addButton(poolButton)
 
 	newResizeFunction(relocateButtons)
 end

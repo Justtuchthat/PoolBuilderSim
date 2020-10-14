@@ -1,18 +1,18 @@
 -- setupStart.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 05-10-2020
+-- last edited on 14-10-2020
 -- this is used to start all classes
 
 function startClasses()
-  setupTiles()
   startMouse()
 	startButtonClass()
 	setupModes()
 	modes.play.draw:addFunction(renderGame)
 	setupControls()
 
-	setupBuildMode()
+  setupBuildMode()
+  setupTiles()
 
 	windowSetup()
 
