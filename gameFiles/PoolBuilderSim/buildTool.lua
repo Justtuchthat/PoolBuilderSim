@@ -13,14 +13,19 @@ function buildPoolStart(_, mouse)
 	width, height, _ = love.window.getMode()
 	if currentMode == "build" and (mouse.x < width - buildMenuBoxWidth) then
 		buildLocStart = screenToWorldSpace(mouse)
+		recalculateBuildCost(Keyboard, mouse)
 	end
 end
 
 function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
 		loc = {}
-		loc.x, loc.y = screenToWorldSpace(mouse)
-		buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile)
+		loc = screenToWorldSpace(mouse)
+		if (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or (removeMoney(currentBuildCost)) then
+			buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile)
+		else
+			print("could not build")
+		end
 		buildLocStart.x = nil
 		buildLocStart.y = nil
 	end

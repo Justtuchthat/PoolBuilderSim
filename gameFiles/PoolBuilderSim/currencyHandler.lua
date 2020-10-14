@@ -8,10 +8,11 @@ buildCost = {}
 buildCost.grass = 0
 buildCost.pool = 10
 
-money = 0
+money = 1000
 
 function addMoney(additionalMoney)
   money = money + additionalMoney
+  return true
 end
 
 function removeMoney(cost)

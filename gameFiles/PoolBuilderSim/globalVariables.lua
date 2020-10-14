@@ -1,12 +1,12 @@
 -- globalVariables.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 06-10-2020
+-- last edited on 14-10-2020
 -- this is used to import all global variables
 -- this is done to clean up the main file
 
 testPoolEdgeMode = false
-cheatingMode = true
+cheatingMode = false
 
 gameworldSize = 100
 
