@@ -8,7 +8,7 @@ knownTiles = {}
 
 buttonStartingY = 40
 
-function newTile(name, color, buildPrice, canBuild)
+function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
   if contains(knownTiles, name) then return false end
   if canBuild == nil then canBuild = true end
   table.insert(knownTiles, name)
@@ -16,6 +16,7 @@ function newTile(name, color, buildPrice, canBuild)
   knownTiles[name].color = {}
   knownTiles[name].color = color
   knownTiles[name].buildCost = buildPrice
+  knownTiles[name].specialDrawFunction = specialDrawFunction
 
   -- creates the button if the player can build this tile type
   if canBuild then
@@ -63,6 +64,6 @@ function setupTiles()
   newTile("grass", {0.1, 0.5, 0.05}, 0)
   newTile("foundation", {0.4, 0.4, 0.4}, 5)
   newTile("pool", {0, 0, 1}, 10)
-  newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false)
+  newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
 end
