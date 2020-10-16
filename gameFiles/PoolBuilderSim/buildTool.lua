@@ -1,13 +1,20 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 14-10-2020
+-- last edited on 16-10-2020
 -- this is used to build pools
 
 buildMenuBoxWidth = 110
 
 local currentBuildTile = "grass"
 local currentBuildCost = 0
+local lastMouseX = 0
+local lastMouseY = 0
+
+function setMouse(_, mouse)
+	lastMouseX = mouse.x
+	lastMouseY = mouse.y
+end
 
 function buildPoolStart(_, mouse)
 	width, height, _ = love.window.getMode()
@@ -19,16 +26,26 @@ end
 
 function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
-		loc = {}
 		loc = screenToWorldSpace(mouse)
-		if (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or (removeMoney(currentBuildCost)) then
-			buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile)
+		if (canBuild(buildLocStart, loc)) then
+			buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile, currentBuildCost)
 		else
 			print("could not build")
 		end
 		buildLocStart.x = nil
 		buildLocStart.y = nil
 	end
+end
+
+function canBuild(startLoc, endLoc)
+	startX, endX = minMax(startLoc.x, endLoc.x)
+	startY, endY = minMax(startLoc.y, endLoc.y)
+	for x = startX, endX do
+		for y = startY, endY do
+			if not isInBounds(newLocationObject(x, y)) then return false end
+		end
+	end
+	return currentBuildCost <= money
 end
 
 function setBuildTilePool()
@@ -69,9 +86,13 @@ function drawSquareOverlay(startLoc, endLoc)
   startX, endX = minMax(startLoc.x, endLoc.x)
   startY, endY = minMax(startLoc.y, endLoc.y)
   love.graphics.translate(drawOffsetX, drawOffsetY)
+	if canBuild(newLocationObject(startX, startY), newLocationObject(endX, endY)) then
+		love.graphics.setColor(0.8, 0.8, 0.1, 0.65)
+	else
+		love.graphics.setColor(0.8, 0.1, 0.1, 0.65)
+	end
   for x = startX, endX do
     for y = startY, endY do
-      love.graphics.setColor(0.8, 0.8, 0.1, 0.65)
       love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
     end
   end
@@ -134,6 +155,8 @@ function setupBuildMode()
 	mouse.moveAction:addFunction(recalculateBuildCost)
 
   width, height, _ = love.window.getMode()
+
+	mouse.moveAction:addFunction(setMouse)
 
   buildButton = newButton("text", newLocationObject(width - 50, 20), "build", {1, 1, 1}, {1, 1, 0})
   buildButton.pressAction:addFunction(enterBuildMode)

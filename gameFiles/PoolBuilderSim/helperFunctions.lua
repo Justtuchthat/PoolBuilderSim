@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 14-10-2020
+-- last edited on 16-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -32,7 +32,8 @@ function contains(table, var)
   return nil
 end
 
-function buildSquareBuilding(beginX, beginY, endX, endY, type)
+function buildSquareBuilding(beginX, beginY, endX, endY, type, currentBuildCost)
+  _ = (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or removeMoney(currentBuildCost)
   beginX, endX = minMax(beginX, endX)
   beginY, endY = minMax(beginY, endY)
   type = type or "grass"
@@ -45,8 +46,8 @@ function buildSquareBuilding(beginX, beginY, endX, endY, type)
 end
 
 function screenToWorldSpace(location)
-	location.x = location.x - drawOffsetX
-	location.x = location.x - drawOffsetY
-	loc = newLocationObject(math.floor(location.x/8), math.floor(location.y/8))
+	locationX = location.x - drawOffsetX
+	locationY = location.y - drawOffsetY
+	loc = newLocationObject(math.floor(locationX/8), math.floor(locationY/8))
 	return loc
 end

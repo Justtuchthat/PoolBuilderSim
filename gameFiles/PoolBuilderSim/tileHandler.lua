@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 14-10-2020
+-- last edited on 16-10-2020
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -10,6 +10,7 @@ buttonStartingY = 40
 
 function newTile(name, color, buildPrice, canBuild)
   if contains(knownTiles, name) then return false end
+  if canBuild == nil then canBuild = true end
   table.insert(knownTiles, name)
   knownTiles[name] = {}
   knownTiles[name].color = {}
@@ -18,14 +19,12 @@ function newTile(name, color, buildPrice, canBuild)
 
   -- creates the button if the player can build this tile type
   if canBuild then
-    print("adding button")
     width, _, _ = love.window.getMode()
     tileButton = newButton("text", newLocationObject(width-100, buttonStartingY), name, {1, 1, 1}, {1, 1, 0})
 
     -- sets the current build tile
     tileButton.pressAction:addFunction(function()
       changeBuildTile(name)
-      print("changed buildMode to " .. currentBuildTile)
     end)
 
     -- sets the color to green
@@ -61,9 +60,9 @@ function tilePrice(x, y)
 end
 
 function setupTiles()
-  newTile("grass", {0.1, 0.5, 0.05}, 0, true)
-  newTile("pool", {0, 0, 1}, 10, true)
+  newTile("grass", {0.1, 0.5, 0.05}, 0)
+  newTile("foundation", {0.4, 0.4, 0.4}, 5)
+  newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false)
-  newTile("foundation", {0.4, 0.4, 0.4}, 5, true)
-  newTile("wall", {0.6, 0.2, 0.2}, 2, true)
+  newTile("wall", {0.6, 0.2, 0.2}, 2)
 end
