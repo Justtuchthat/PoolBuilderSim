@@ -1,7 +1,7 @@
 -- gameInit.lua
 -- Created by Justtuchthat
 -- first created on 10-8-2020
--- last edited on 06-10-2020
+-- last edited on 18-10-2020
 -- this is used for initiating the game
 
 function initGame(gameSize)
@@ -20,5 +20,6 @@ end
 function newGameCell()
   gameCell = {}
   gameCell.type = "grass"
+  gameCell.inside = false
   return gameCell
 end

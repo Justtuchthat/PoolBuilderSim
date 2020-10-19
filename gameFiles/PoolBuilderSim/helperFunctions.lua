@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 16-10-2020
+-- last edited on 18-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -43,6 +43,7 @@ function buildSquareBuilding(beginX, beginY, endX, endY, type, currentBuildCost)
 		end
 	end
 	checkPoolEdges(gameworld)
+  insideTest(gameworld)
 end
 
 function screenToWorldSpace(location)

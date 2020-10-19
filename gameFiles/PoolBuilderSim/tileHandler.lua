@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 16-10-2020
+-- last edited on 18-10-2020
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -17,6 +17,7 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
   knownTiles[name].color = color
   knownTiles[name].buildCost = buildPrice
   knownTiles[name].specialDrawFunction = specialDrawFunction
+  knownTiles[name].insideSeparator = false
 
   -- creates the button if the player can build this tile type
   if canBuild then
@@ -66,4 +67,5 @@ function setupTiles()
   newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
+  knownTiles.wall.insideSeparator = true
 end
