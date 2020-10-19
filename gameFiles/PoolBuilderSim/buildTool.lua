@@ -103,6 +103,7 @@ function drawBuildCost(start, End)
 	startX, endX = minMax(start.x, End.x)
 	startY, endY = minMax(start.y, End.y)
 	love.graphics.setColor(0.8, 0.8, 0.1)
+	currentBuildCost = currentBuildCost or 0
 	buildCostText = love.graphics.newText(love.graphics.getFont(), "buildcost: " .. currentBuildCost)
 	love.graphics.draw(buildCostText, mouse.x, mouse.y)
 end

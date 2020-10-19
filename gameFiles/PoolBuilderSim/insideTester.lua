@@ -1,7 +1,7 @@
 -- insideTester.lua
 -- created by Justtuchthat
 -- first created on 18-10-2020
--- last edited on 18-10-2020
+-- last edited on 19-10-2020
 -- this is used for checking which tiles are inside and which tiles are outside
 
 local tilesToDo = {}

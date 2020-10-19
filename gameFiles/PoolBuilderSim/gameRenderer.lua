@@ -1,7 +1,7 @@
 -- gameRenderer.lua
 -- created by Justtuchthat
 -- first created on 10-08-2020
--- last edited on 16-10-2020
+-- last edited on 19-10-2020
 -- this is used to render the game
 
 errorCellColor = {1, 1, 0}
