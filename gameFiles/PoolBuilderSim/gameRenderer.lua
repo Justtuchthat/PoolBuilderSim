@@ -8,7 +8,7 @@ errorCellColor = {1, 1, 0}
 
 function renderGame()
   love.graphics.translate(drawOffsetX, drawOffsetY)
-  for y, xRow in ipairs(gameworld) do
+  for y, xRow in ipairs(getItterableGameworld()) do
     for x, cell in ipairs(xRow) do
       if knownTiles[cell.type].specialDrawFunction then
         knownTiles[cell.type].specialDrawFunction(newLocationObject(x, y))

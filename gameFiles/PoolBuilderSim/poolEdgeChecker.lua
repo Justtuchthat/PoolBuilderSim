@@ -20,13 +20,13 @@ local function hasNonPoolNeighbours(x, y)
   return false
 end
 
-function checkPoolEdges(gameworld)
-  for x, yRow in ipairs(gameworld) do
+function checkPoolEdges()
+  for x, yRow in ipairs(getItterableGameworld()) do
     for y, cell in ipairs(yRow) do
       tempLoc = newLocationObject(x, y)
       if cell.type == "pool" or cell.type == "poolEdge" then
         setTileType(tempLoc, "pool")
-        if hasNonPoolNeighbours(x, y, gameworld) then
+        if hasNonPoolNeighbours(x, y) then
           setTileType(tempLoc, "poolEdge")
         end
       end

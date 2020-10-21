@@ -42,8 +42,8 @@ function buildSquareBuilding(beginX, beginY, endX, endY, type, currentBuildCost)
 			setTileType(newLocationObject(x,y), type)
 		end
 	end
-	checkPoolEdges(gameworld)
-  insideTest(gameworld)
+	checkPoolEdges()
+  insideTest()
 end
 
 function screenToWorldSpace(location)

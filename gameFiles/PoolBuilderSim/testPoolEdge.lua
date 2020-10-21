@@ -13,7 +13,7 @@ function mouseReleaseCellEdit()
 	if currentMode ~= "play" then return end
 	setTileType(cellLoc, previousCellType)
 	previousCellType = "grass"
-	checkPoolEdges(gameworld)
+	checkPoolEdges()
 end
 
 function mouseMoveCellEdit(_, mouse)
@@ -33,7 +33,7 @@ function mouseDownCellEdit(_, mouse)
 	setTileType(loc, "newCell")
 	cellLoc.x = loc.y
 	cellLoc.y = loc.x
-	checkPoolEdges(gameworld)
+	checkPoolEdges()
 end
 
 function setupMouseCodeTestPoolEdge()

@@ -67,6 +67,16 @@ function getTileType(loc)
   end
 end
 
+function setTileInside(loc, insideBool)
+  if not isInBounds(loc) then return end
+  assert(type(insideBool) == "boolean", "setTileInside requires a boolean parameter as second argument")
+  gameworld[loc.x][loc.y].inside = insideBool
+end
+
+function getItterableGameword()
+  return gameworld
+end
+
 function setupTiles()
   newTile("grass", {0.1, 0.5, 0.05}, 0)
   newTile("foundation", {0.4, 0.4, 0.4}, 5)

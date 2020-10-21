@@ -35,7 +35,7 @@ local function isBusyOrDone(tileLoc)
   return visitedTiles[tileLoc.x][tileLoc.y]
 end
 
-local function addNeigbourTiles(tileLoc, gameworld)
+local function addNeigbourTiles(tileLoc)
   up = newLocationObject(tileLoc.x, tileLoc.y - 1)
   down = newLocationObject(tileLoc.x, tileLoc.y + 1)
   left = newLocationObject(tileLoc.x - 1, tileLoc.y)
@@ -93,8 +93,8 @@ local function setVisited(tileLoc)
   visitedTiles[tileLoc.x][tileLoc.y] = true
 end
 
-function insideTest(gameworld)
-  for y, xRow in ipairs(gameworld) do
+function insideTest()
+  for y, xRow in ipairs(getItterableGameworld()) do
     for x, gameCell in ipairs(xRow) do
       gameCell.inside = true
     end
@@ -105,9 +105,9 @@ function insideTest(gameworld)
   repeat
     currentTile = removeTile()
     setVisited(currentTile)
-    addNeigbourTiles(currentTile, gameworld)
+    addNeigbourTiles(currentTile)
     if isInBounds(currentTile) then
-      gameworld[currentTile.x][currentTile.y].inside = false
+      setTileInside(currentTile, false)
     end
   until #tilesToDo == 0
 end
