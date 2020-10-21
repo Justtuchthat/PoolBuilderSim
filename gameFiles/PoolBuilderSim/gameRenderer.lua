@@ -1,7 +1,7 @@
 -- gameRenderer.lua
 -- created by Justtuchthat
 -- first created on 10-08-2020
--- last edited on 19-10-2020
+-- last edited on 21-10-2020
 -- this is used to render the game
 
 errorCellColor = {1, 1, 0}
@@ -49,30 +49,38 @@ function drawPoolEdge(location)
   local se = false
   local sw = false
 
-  if isInBounds(newLocationObject(x-1, y)) then
-    w = gameworld[y][x-1].type == "pool" or gameworld[y][x-1].type == "poolEdge"
+  temp = newLocationObject(x-1, y)
+  if isInBounds(temp) then
+    w = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  if isInBounds(newLocationObject(x+1, y)) then
-    e = gameworld[y][x+1].type == "pool" or gameworld[y][x+1].type == "poolEdge"
+  temp = newLocationObject(x+1, y)
+  if isInBounds(temp) then
+    e = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  if isInBounds(newLocationObject(x, y-1)) then
-    n = gameworld[y-1][x].type == "pool" or gameworld[y-1][x].type == "poolEdge"
+  temp = newLocationObject(x, y-1)
+  if isInBounds(temp) then
+    n = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  if isInBounds(newLocationObject(x, y+1)) then
-    s = gameworld[y+1][x].type == "pool" or gameworld[y+1][x].type == "poolEdge"
+  temp = newLocationObject(x, y+1)
+  if isInBounds(temp) then
+    s = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
 
-  if isInBounds(newLocationObject(x-1, y-1)) then
-    nw = gameworld[y-1][x-1].type == "pool" or gameworld[y-1][x-1].type == "poolEdge"
+  temp = newLocationObject(x-1, y-1)
+  if isInBounds(temp) then
+    nw = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  if isInBounds(newLocationObject(x+1, y-1)) then
-    ne = gameworld[y-1][x+1].type == "pool" or gameworld[y-1][x+1].type == "poolEdge"
+  temp = newLocationObject(x+1, y-1)
+  if isInBounds(temp) then
+    ne = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  if isInBounds(newLocationObject(x-1, y+1)) then
-    sw = gameworld[y+1][x-1].type == "pool" or gameworld[y+1][x-1].type == "poolEdge"
+  temp = newLocationObject(x-1, y+1)
+  if isInBounds(temp) then
+    sw = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  if isInBounds(newLocationObject(x+1, y+1)) then
-    se = gameworld[y+1][x+1].type == "pool" or gameworld[y+1][x+1].type == "poolEdge"
+  temp = newLocationObject(x+1, y+1)
+  if isInBounds(temp) then
+    se = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
 
   love.graphics.setColor(knownTiles.pool.color)

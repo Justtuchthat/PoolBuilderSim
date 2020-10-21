@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 18-10-2020
+-- last edited on 21-10-2020
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -39,7 +39,7 @@ function buildSquareBuilding(beginX, beginY, endX, endY, type, currentBuildCost)
   type = type or "grass"
 	for x = beginX, endX do
 		for y = beginY, endY do
-			setCellType(x, y, type)
+			setTileType(newLocationObject(x,y), type)
 		end
 	end
 	checkPoolEdges(gameworld)

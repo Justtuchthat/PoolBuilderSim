@@ -1,7 +1,7 @@
 -- insideTester.lua
 -- created by Justtuchthat
 -- first created on 18-10-2020
--- last edited on 19-10-2020
+-- last edited on 21-10-2020
 -- this is used for checking which tiles are inside and which tiles are outside
 
 local tilesToDo = {}
@@ -43,7 +43,7 @@ local function addNeigbourTiles(tileLoc, gameworld)
 
   if isInInsideTestBounds(up) and not isBusyOrDone(up) then
     if isInBounds(up) then
-      if not knownTiles[gameworld[up.x][up.y].type].insideSeparator then
+      if not knownTiles[getTileTupe(up)].insideSeparator then
         addTile(up)
       end
     else
@@ -52,7 +52,7 @@ local function addNeigbourTiles(tileLoc, gameworld)
   end
   if isInInsideTestBounds(down) and not isBusyOrDone(down) then
     if isInBounds(down) then
-      if not knownTiles[gameworld[down.x][down.y].type].insideSeparator then
+      if not knownTiles[getTileType(down)].insideSeparator then
         addTile(down)
       end
     else
@@ -61,7 +61,7 @@ local function addNeigbourTiles(tileLoc, gameworld)
   end
   if isInInsideTestBounds(left) and not isBusyOrDone(left) then
     if isInBounds(left) then
-      if not knownTiles[gameworld[left.x][left.y].type].insideSeparator then
+      if not knownTiles[getTileType(left)].insideSeparator then
         addTile(left)
       end
     else
@@ -70,7 +70,7 @@ local function addNeigbourTiles(tileLoc, gameworld)
   end
   if isInInsideTestBounds(right) and not isBusyOrDone(right) then
     if isInBounds(right) then
-      if not knownTiles[gameworld[right.x][right.y].type].insideSeparator then
+      if not knownTiles[getTileType(right)].insideSeparator then
         addTile(right)
       end
     else

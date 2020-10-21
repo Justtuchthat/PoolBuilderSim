@@ -1,7 +1,7 @@
 -- testPoolEdge.lua
 -- created by Justtuchthat
 -- first created on 10-09-2020
--- last edited on 14-10-2020
+-- last edited on 21-10-2020
 -- this is used to test all pool edges
 
 local previousCellType = "grassCell"
@@ -11,8 +11,8 @@ cellLoc.y = 0
 
 function mouseReleaseCellEdit()
 	if currentMode ~= "play" then return end
-	gameworld[cellLoc.y][cellLoc.x].type = previousCellType
-	previousCellType = "grassCell"
+	setTileType(cellLoc, previousCellType)
+	previousCellType = "grass"
 	checkPoolEdges(gameworld)
 end
 
@@ -29,8 +29,8 @@ end
 function mouseDownCellEdit(_, mouse)
 	if currentMode ~= "play" then return end
 	loc = screenToWorldSpace(mouse)
-	previousCellType = gameworld[loc.x][loc.y].type
-	gameworld[loc.x][loc.y].type = "newCell"
+	previousCellType = getTileType(loc)
+	setTileType(loc, "newCell")
 	cellLoc.x = loc.y
 	cellLoc.y = loc.x
 	checkPoolEdges(gameworld)

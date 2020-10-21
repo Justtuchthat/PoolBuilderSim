@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 18-10-2020
+-- last edited on 21-10-2020
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -48,17 +48,23 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
   return true
 end
 
-function setCellType(x, y, newType)
-  if x < 1 then return end
-  if x > gameworldSize then return end
-  if y < 1 then return end
-  if y > gameworldSize then return end
-  gameworld[y][x].type = newType
-end
-
 function tilePrice(x, y)
   tileType = gameworld[x][y].type
   return knownTiles[tileType].buildCost
+end
+
+function setTileType(loc, newTile)
+  if isInBounds(loc) and contains(knownTiles, newTile) then
+    gameworld[loc.x][loc.y].type = newTile
+  end
+end
+
+function getTileType(loc)
+  if isInBounds(loc) then
+    return gameworld[loc.x][loc.y].type
+  else
+    return nil
+  end
 end
 
 function setupTiles()
