@@ -49,36 +49,36 @@ function drawPoolEdge(location)
   local se = false
   local sw = false
 
-  temp = newLocationObject(x-1, y)
+  temp = newLocationObject(y, x-1)
   if isInBounds(temp) then
     w = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  temp = newLocationObject(x+1, y)
+  temp = newLocationObject(y, x+1)
   if isInBounds(temp) then
     e = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  temp = newLocationObject(x, y-1)
+  temp = newLocationObject(y-1, x)
   if isInBounds(temp) then
     n = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  temp = newLocationObject(x, y+1)
+  temp = newLocationObject(y+1, x)
   if isInBounds(temp) then
     s = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
 
-  temp = newLocationObject(x-1, y-1)
+  temp = newLocationObject(y-1, x-1)
   if isInBounds(temp) then
     nw = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  temp = newLocationObject(x+1, y-1)
+  temp = newLocationObject(y-1, x+1)
   if isInBounds(temp) then
     ne = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  temp = newLocationObject(x-1, y+1)
+  temp = newLocationObject(y+1, x-1)
   if isInBounds(temp) then
     sw = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
-  temp = newLocationObject(x+1, y+1)
+  temp = newLocationObject(y+1, x+1)
   if isInBounds(temp) then
     se = getTileType(temp) == "pool" or getTileType(temp) == "poolEdge"
   end
