@@ -73,8 +73,12 @@ function setTileInside(loc, insideBool)
   gameworld[loc.x][loc.y].inside = insideBool
 end
 
-function getItterableGameword()
+function getItterableGameworld()
   return gameworld
+end
+
+function getGameworldSize()
+  return gameworldSize
 end
 
 function setupTiles()

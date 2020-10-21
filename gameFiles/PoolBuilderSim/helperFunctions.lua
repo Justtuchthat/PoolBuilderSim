@@ -12,8 +12,8 @@ function newLocationObject(x, y)
 end
 
 function isInBounds(location)
-  if location.x < 1 or location.x > gameworldSize then return false end
-  if location.y < 1 or location.y > gameworldSize then return false end
+  if location.x < 1 or location.x > getGameworldSize() then return false end
+  if location.y < 1 or location.y > getGameworldSize() then return false end
   return true
 end
 
@@ -36,10 +36,12 @@ function buildSquareBuilding(beginX, beginY, endX, endY, type, currentBuildCost)
   _ = (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or removeMoney(currentBuildCost)
   beginX, endX = minMax(beginX, endX)
   beginY, endY = minMax(beginY, endY)
+  assert(beginX <= endX, "testX")
+  assert(beginY <= endY, "testY")
   type = type or "grass"
 	for x = beginX, endX do
 		for y = beginY, endY do
-			setTileType(newLocationObject(x,y), type)
+			setTileType(newLocationObject(y,x), type)
 		end
 	end
 	checkPoolEdges()

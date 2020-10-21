@@ -1,7 +1,7 @@
 -- globalVariables.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 16-10-2020
+-- last edited on 21-10-2020
 -- this is used to import all global variables
 -- this is done to clean up the main file
 
@@ -20,4 +20,4 @@ buildLocStart.y = nil
 
 movementSpeed = 10
 
-gameworld = initGame(gameWorldSize)
+gameworld = initGame(getGameworldSize())

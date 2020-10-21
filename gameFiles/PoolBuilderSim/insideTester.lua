@@ -21,8 +21,8 @@ local function removeTile()
 end
 
 local function isInInsideTestBounds(loc)
-  if loc.x < 0 or loc.x > gameworldSize + 1 then return false end
-  if loc.y < 0 or loc.y > gameworldSize + 1 then return false end
+  if loc.x < 0 or loc.x > getGameworldSize() + 1 then return false end
+  if loc.y < 0 or loc.y > getGameworldSize() + 1 then return false end
   return true
 end
 
@@ -43,7 +43,7 @@ local function addNeigbourTiles(tileLoc)
 
   if isInInsideTestBounds(up) and not isBusyOrDone(up) then
     if isInBounds(up) then
-      if not knownTiles[getTileTupe(up)].insideSeparator then
+      if not knownTiles[getTileType(up)].insideSeparator then
         addTile(up)
       end
     else
@@ -81,9 +81,9 @@ end
 
 local function resetVisited()
   visitedTiles = {}
-  for x = 0, gameworldSize + 1 do
+  for x = 0, getGameworldSize() + 1 do
     visitedTiles[x] = {}
-    for y = 0, gameworldSize + 1 do
+    for y = 0, getGameworldSize() + 1 do
       visitedTiles[x][y] = false
     end
   end
@@ -99,7 +99,6 @@ function insideTest()
       gameCell.inside = true
     end
   end
-  print("test")
   resetVisited()
   addTile(newLocationObject(0, 0))
   repeat
