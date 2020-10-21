@@ -32,12 +32,10 @@ function contains(table, var)
   return nil
 end
 
-function buildSquareBuilding(beginX, beginY, endX, endY, type, currentBuildCost)
+function buildSquareBuilding(startLoc, endLoc, type, currentBuildCost)
   _ = (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or removeMoney(currentBuildCost)
-  beginX, endX = minMax(beginX, endX)
-  beginY, endY = minMax(beginY, endY)
-  assert(beginX <= endX, "testX")
-  assert(beginY <= endY, "testY")
+  beginX, endX = minMax(startLoc.x, endLoc.x)
+  beginY, endY = minMax(startLoc.y, endLoc.y)
   type = type or "grass"
 	for x = beginX, endX do
 		for y = beginY, endY do

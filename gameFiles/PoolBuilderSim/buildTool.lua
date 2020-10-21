@@ -26,9 +26,10 @@ end
 
 function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
-		loc = screenToWorldSpace(mouse)
-		if (canBuild(buildLocStart, loc)) then
-			buildSquareBuilding(buildLocStart.x, buildLocStart.y, loc.x, loc.y, currentBuildTile, currentBuildCost)
+		startLoc = newLocationObject(buildLocStart.x, buildLocStart.y)
+		endLoc = screenToWorldSpace(mouse)
+		if (canBuild(startLoc, endLoc)) then
+			buildSquareBuilding(startLoc, endLoc, currentBuildTile, currentBuildCost)
 		else
 			print("could not build")
 		end

@@ -20,4 +20,4 @@ buildLocStart.y = nil
 
 movementSpeed = 10
 
-gameworld = initGame(getGameworldSize())
+gameworld = initGame(gameworldSize)
