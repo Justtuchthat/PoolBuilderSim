@@ -1,7 +1,7 @@
 -- buttonClass.lua
 -- created by Justtuchthat
 -- first created on 10-09-2020
--- last edited on 15-09-2020
+-- last edited on 05-11-2020
 -- this is the class that will contain all buttons
 
 allButtons = {}
@@ -15,6 +15,12 @@ function newButton(type, loc, face, colorNormal, hoverOverColor)
   newButton.type = type
   newButton.loc = loc
   newButton.disabled = true
+  newButton.disable = function(self)
+    self.disabled = true
+  end
+  newButton.enable = function(self)
+    self.disabled = false
+  end
   newButton.size = {}
   if type == "text" then
     newButton.face = love.graphics.newText(love.graphics.newFont(), face)

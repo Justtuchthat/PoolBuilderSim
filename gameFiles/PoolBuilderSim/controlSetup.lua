@@ -1,7 +1,7 @@
 -- movementSetup.lua
 -- created by Justtuchthat
 -- first created on 16-08-2020
--- last edited on 08-10-2020
+-- last edited on 05-11-2020
 -- this is used to setup all the keys for movement
 
 local function mouseWheelMove(keyboard, mouse)
@@ -10,7 +10,6 @@ local function mouseWheelMove(keyboard, mouse)
 	else
 		drawOffsetY = drawOffsetY + mouse.wheel.y*movementSpeed
 	end
-	mouse.wheel.y = 0
 end
 
 local function moveLeft()

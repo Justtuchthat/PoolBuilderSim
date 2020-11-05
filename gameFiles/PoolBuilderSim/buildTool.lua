@@ -1,7 +1,7 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 16-10-2020
+-- last edited on 05-11-2020
 -- this is used to build pools
 
 buildMenuBoxWidth = 110
@@ -162,11 +162,11 @@ function setupBuildMode()
 
   buildButton = newButton("text", newLocationObject(width - 50, 20), "build", {1, 1, 1}, {1, 1, 0})
   buildButton.pressAction:addFunction(enterBuildMode)
-  modes.play.buttons:addButton(buildButton)
+  modes.play.menuItems:addMenuItem(buildButton)
 
 	exitBuildModeButton = newButton("text", newLocationObject(width-100, 20), "exit buildmode", {1, 0.8, 0.8}, {1, 0.2, 0.2})
 	exitBuildModeButton.pressAction:addFunction(exitBuildMode)
-	modes.build.buttons:addButton(exitBuildModeButton)
+	modes.build.menuItems:addMenuItem(exitBuildModeButton)
 
 	newResizeFunction(relocateButtons)
 end

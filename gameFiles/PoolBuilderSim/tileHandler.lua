@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 25-10-2020
+-- last edited on 05-11-2020
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -36,7 +36,7 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
     end)
 
     -- adds the button to the build menu
-    modes.build.buttons:addButton(tileButton)
+    modes.build.menuItems:addMenuItem(tileButton)
 
     -- places the button at the right location after resizes
     newResizeFunction(function(newWidth, newHeight)

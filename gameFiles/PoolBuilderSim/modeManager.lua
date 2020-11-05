@@ -1,7 +1,7 @@
 -- modeManager.lua
 -- created by Justtuchthat
 -- first created on 11-08-2020
--- last edited on 15-08-2020
+-- last edited on 05-11-2020
 -- this is used to manage all different modes
 
 possibleModes = {}
@@ -11,21 +11,21 @@ currentMode = ""
 function addMode(newMode)
   table.insert(possibleModes, newMode)
   modes[newMode] = {}
-  modes[newMode].buttons = {}
-  modes[newMode].buttons.addButton = function(self, btn)
-    table.insert(self, btn)
-    if modes[currentMode].buttons == self then
-      btn.disabled = false
+  modes[newMode].menuItems = {}
+  modes[newMode].menuItems.addMenuItem = function(self, menuItem)
+    table.insert(self, menuItem)
+    if modes[currentMode].menuItems == self then
+      menuItem:enable()
     end
   end
   modes[newMode].enable = function(self)
-    for i = 1, #self.buttons do
-      self.buttons[i].disabled = false
+    for i = 1, #self.menuItems do
+      self.menuItems[i]:enable()
     end
   end
   modes[newMode].disable = function(self)
-    for i = 1, #self.buttons do
-      self.buttons[i].disabled = true
+    for i = 1, #self.menuItems do
+      self.menuItems[i]:disable()
     end
   end
   modes[newMode].draw = {}
@@ -53,7 +53,7 @@ function modeDraw()
   for i, fn in ipairs(modes[currentMode].draw) do
     fn()
   end
-	for i, btn in ipairs(modes[currentMode].buttons) do
+	for i, btn in ipairs(modes[currentMode].menuItems) do
     btn:draw()
   end
 end
