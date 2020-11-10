@@ -1,7 +1,7 @@
 -- modeManager.lua
 -- created by Justtuchthat
 -- first created on 11-08-2020
--- last edited on 05-11-2020
+-- last edited on 10-11-2020
 -- this is used to manage all different modes
 
 possibleModes = {}
@@ -14,7 +14,7 @@ function addMode(newMode)
   modes[newMode].menuItems = {}
   modes[newMode].menuItems.addMenuItem = function(self, menuItem)
     table.insert(self, menuItem)
-    if modes[currentMode].menuItems == self then
+    if modes[currentMode] and modes[currentMode].menuItems == self then
       menuItem:enable()
     end
   end

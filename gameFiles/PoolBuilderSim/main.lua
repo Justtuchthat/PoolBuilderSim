@@ -1,7 +1,7 @@
 -- main.lua
 -- created by Justtuchthat
 -- first created on 10-8-2020
--- last edited on 05-11-2020
+-- last edited on 10-11-2020
 -- this is used to start the game
 
 require("require")
@@ -31,7 +31,6 @@ end
 
 function love.draw()
 	modeDraw()
-	scrollObject:draw()
 end
 
 function love.update()

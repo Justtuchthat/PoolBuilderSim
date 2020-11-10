@@ -1,37 +1,44 @@
 -- setupStart.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 05-11-2020
+-- last edited on 10-11-2020
 -- this is used to start all classes
 
 function setupMainMenu()
   addMode("mainMenu")
   changeMode("mainMenu")
   width, height, _ = love.window.getMode()
-  print(width .. " " .. height)
-  playTestButton = newButton("text", newLocationObject(width/2, height/2), "playTest", {1, 1, 1}, {0.2, 0.8, 0.3})
-  modes.mainMenu.menuItems:addMenuItem(playTestButton)
+  loadButton = newButton("text", newLocationObject(width/2, height/2 - 10), "load", {1, 1, 1}, {0.2, 0.8, 0.3})
+  newGameButton = newButton("text", newLocationObject(width/2, height/2 + 10), "new game", {1, 1, 1}, {0.2, 0.8, 0.3})
+  modes.mainMenu.menuItems:addMenuItem(loadButton)
+  modes.mainMenu.menuItems:addMenuItem(newGameButton)
   newResizeFunction(function(newWidth, newHeight)
-    playTestButton.loc.x = newWidth/2
-    playTestButton.loc.y = neHeight/2
+    loadButton.loc.x = newWidth/2
+    loadButton.loc.y = neHeight/2 - 10
+    newGameButton.loc.x = newWidth/2
+    newGameButton.loc.y = neHeight/2 + 10
   end)
-  playTestButton.pressAction:addFunction(function()
+  loadButton.pressAction:addFunction(function()
+    changeMode("loadMenu")
+  end)
+  newGameButton.pressAction:addFunction(function()
     changeMode("play")
   end)
 end
 
 function startClasses()
+  windowSetup()
   startMouse()
 	startButtonClass()
   addMode("play")
-  setupMainMenu()
 	modes.play.draw:addFunction(renderGame)
 	setupControls()
 
   setupBuildMode()
   setupTiles()
 
-	windowSetup()
+  setupMainMenu()
+  setupLoadMenu()
 
 	if testPoolEdgeMode then
 		setupMouseCodeTestPoolEdge()

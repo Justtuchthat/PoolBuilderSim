@@ -1,7 +1,7 @@
 -- saveLoad.lua
 -- created by Justtuchthat
 -- first created on 21-10-2020
--- last edited on 25-10-2020
+-- last edited on 10-11-2020
 -- this is used for saving and loading the game
 
 local json = require("json")
@@ -40,4 +40,24 @@ end
 function loadGame(fileName)
   gameLoad = load(fileName)
   setSaveableGameworld(gameLoad)
+end
+
+function createLoadButtons()
+  loadButtons = {}
+  loadFileNames = scanForFiles("saves/")
+  for i, buttonName in ipairs(loadFileNames) do
+    loadButtons[i].name = buttonName
+    loadButtons[i].pressAction = function()
+      loadGame(buttonName)
+      changeMode("play")
+    end
+  end
+  return loadButtons
+end
+
+function setupLoadMenu()
+  addMode("loadMenu")
+  width, height, _ = love.window.getMode()
+  loadButtonArray = createLoadButtons()
+  newScrollableButtonSelector(loadButtonArray, 10, newLocationObject(100, 100), "loadMenu")
 end
