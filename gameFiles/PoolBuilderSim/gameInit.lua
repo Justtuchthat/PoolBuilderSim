@@ -7,7 +7,6 @@
 function initGame(gameSize)
   gameSize = gameSize or 100
   game = {}
-  game.size = gameSize
   for x = 1, gameSize do
     game[x] = {}
     for y = 1, gameSize do

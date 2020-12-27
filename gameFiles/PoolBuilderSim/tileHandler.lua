@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 05-11-2020
+-- last edited on 22-12-2020
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -81,6 +81,7 @@ function getSaveableGameworld()
   saveable = {}
   saveable.money = money
   saveable.game = gameworld
+  return saveable
 end
 
 function setSaveableGameworld(gameworldSave)

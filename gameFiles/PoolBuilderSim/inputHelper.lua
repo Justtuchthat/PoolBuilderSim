@@ -1,6 +1,6 @@
 -- inputHelper.lua
 -- created by Justtuchthat
--- last updated on 04-10-2020
+-- last updated on 22-12-2020
 -- this program should help with getting the input of keys on the keyboard
 
 Keyboard = {}
@@ -9,6 +9,7 @@ mouse = {}
 love.keyboard.setKeyRepeat(true)
 
 function Keyboard:addKeyListener(key)
+	if self[key] then return end
 	self[key] = {}
 	self[key].pressed = false
 	self[key].isRepeat = false
@@ -61,7 +62,50 @@ function startMouse(buttonAmount)
 	mouse.presses = 0
 end
 
+textInputItemBannedKeys = {'lshift','rshift','capslock','lalt','ralt','rctrl',
+'lctrl','kp.','kp1','kp2','kp3','kp4','kp5','kp6','kp7','kp8','kp9','numlock',
+'kp/','kp*','kp-','kp+','insert','home','pageup','delete','end','pagedown','f1',
+'f2','f3','f4','f5','f6','f7','f8','f9','f10','f11','f12','printscreen',
+'scrolllock','pause','escape','tab','up','down','left','right'}
+
+textInputItemsShiftKeys = {{'a','A'},{'b','B'},{'c','C'},{'d','D'},{'e','E'},
+{'f','F'},{'g','G'},{'h','H'},{'i','I'},{'j','J'},{'k','K'},{'l','L'},{'m','M'},
+{'n','N'},{'o','O'},{'p','P'},{'q','Q'},{'r','R'},{'s','S'},{'t','T'},{'u','U'},
+{'v','V'},{'w','W'},{'x','X'},{'y','Y'},{'z','Z'},{'1','!'},{'2','@'},{'3','#'},
+{'4','$'},{'5','%'},{'6','^'},{'7','&'},{'8','*'},{'9','('},{'0',')'},{'-','_'},
+{'=','+'},{'\\','|'},{'[','{'},{']','}'},{';',':'},{"'",'"'},{',','<'},{'.','>'},
+{'/','?'},{'`','~'}}
+
+function getShiftKey(key)
+	for i, keyCode in ipairs(textInputItemsShiftKeys) do
+		if key == keyCode[1] then
+			key = keyCode[2]
+		end
+	end
+	return key
+end
+
 function love.keypressed(key, scancode, isRepeat)
+	for i, textInputItem in ipairs(textInputItems) do
+		if not textInputItem.disabled then
+			if key == 'return' or key == 'kpenter' then
+				textInputItem.enterFunction(textInputItem)
+			elseif key == 'space' then
+				textInputItem:addLetter(' ')
+			elseif key == 'backspace' then
+				textInputItem:deleteLetter()
+			elseif contains(textInputItemBannedKeys, key) then
+				--skips all banned keys
+			else
+				if love.keyboard.isDown('lshift') or love.keyboard.isDown('lshift') then
+					key = getShiftKey(key)
+					textInputItem:addLetter(key)
+				else
+					textInputItem:addLetter(key)
+				end
+			end
+		end
+	end
 	if not Keyboard[key] then return end
 	Keyboard[key].pressed = true
 	Keyboard[key].isRepeat = isRepeat

@@ -1,38 +1,62 @@
 -- movementSetup.lua
 -- created by Justtuchthat
 -- first created on 16-08-2020
--- last edited on 05-11-2020
+-- last edited on 19-11-2020
 -- this is used to setup all the keys for movement
 
 local function mouseWheelMove(keyboard, mouse)
-	if Keyboard.lshift.pressed then
-		drawOffsetX = drawOffsetX + mouse.wheel.y*movementSpeed
-	else
-		drawOffsetY = drawOffsetY + mouse.wheel.y*movementSpeed
+	if currentMode == "play" or currentMode == "build" then
+		if Keyboard.lshift.pressed then
+			drawOffsetX = drawOffsetX - mouse.wheel.y*movementSpeed
+		else
+			drawOffsetY = drawOffsetY + mouse.wheel.y*movementSpeed
+		end
 	end
 end
 
 local function moveLeft()
-	drawOffsetX = drawOffsetX + movementSpeed
+	if currentMode == "play" or currentMode == "build" then
+		drawOffsetX = drawOffsetX - movementSpeed
+	end
 end
 
 local function moveOnRightMouseButton(_, mouse)
-	if mouse.button[2].pressed then
-		drawOffsetX = drawOffsetX + mouse.dx
-		drawOffsetY = drawOffsetY + mouse.dy
+	if currentMode == "play" or currentMode == "build" then
+		if mouse.button[2].pressed then
+			drawOffsetX = drawOffsetX + mouse.dx
+			drawOffsetY = drawOffsetY + mouse.dy
+		end
 	end
 end
 
 local function moveRight()
-	drawOffsetX = drawOffsetX - movementSpeed
+	if currentMode == "play" or currentMode == "build" then
+		drawOffsetX = drawOffsetX + movementSpeed
+	end
 end
 
 local function moveUp()
-	drawOffsetY = drawOffsetY + movementSpeed
+	if currentMode == "play" or currentMode == "build" then
+		drawOffsetY = drawOffsetY - movementSpeed
+	end
 end
 
 local function moveDown()
-	drawOffsetY = drawOffsetY - movementSpeed
+	if currentMode == "play" or currentMode == "build" then
+		drawOffsetY = drawOffsetY + movementSpeed
+	end
+end
+
+local function openEscapeMenu()
+	if currentMode == "play" then
+		changeMode("escapeMenu")
+	elseif currentMode == "build" then
+		changeMode("play")
+	elseif currentMode == "escapeMenu" then
+		changeMode("play")
+	elseif currentMode == "mainMenu" then
+		love.event.quit(0)
+	end
 end
 
 local function addKeyListeners()
@@ -45,6 +69,7 @@ local function addKeyListeners()
 	Keyboard:addKeyListener('down')
 	Keyboard:addKeyListener('right')
 	Keyboard:addKeyListener('lshift')
+	Keyboard:addKeyListener('escape')
 end
 
 local function connectKeysWithFunctions()
@@ -64,6 +89,7 @@ local function connectKeysWithFunctions()
 	Keyboard.down.continuePressActions:addFunction(moveDown)
 	Keyboard.right.firstPressActions:addFunction(moveRight)
 	Keyboard.right.continuePressActions:addFunction(moveRight)
+	Keyboard.escape.lastPressActions:addFunction(openEscapeMenu)
 end
 
 local function addMouseScrolling()
@@ -75,10 +101,10 @@ local function buttonsSetup()
 end
 
 function setupControls()
-  	addKeyListeners()
-		connectKeysWithFunctions()
-		buttonsSetup()
+  addKeyListeners()
+	connectKeysWithFunctions()
+	buttonsSetup()
 
-		addMouseScrolling()
-		mouse.moveAction:addFunction(moveOnRightMouseButton)
+	addMouseScrolling()
+	mouse.moveAction:addFunction(moveOnRightMouseButton)
 end

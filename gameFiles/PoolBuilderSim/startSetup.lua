@@ -1,7 +1,7 @@
 -- setupStart.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 10-11-2020
+-- last edited on 19-11-2020
 -- this is used to start all classes
 
 function setupMainMenu()
@@ -32,6 +32,9 @@ function startClasses()
 	startButtonClass()
   addMode("play")
 	modes.play.draw:addFunction(renderGame)
+
+  setupEscapeMenu()
+
 	setupControls()
 
   setupBuildMode()
@@ -39,6 +42,7 @@ function startClasses()
 
   setupMainMenu()
   setupLoadMenu()
+  setupSaveMenu()
 
 	if testPoolEdgeMode then
 		setupMouseCodeTestPoolEdge()
