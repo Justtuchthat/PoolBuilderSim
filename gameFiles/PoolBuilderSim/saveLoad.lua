@@ -1,7 +1,7 @@
 -- saveLoad.lua
 -- created by Justtuchthat
 -- first created on 21-10-2020
--- last edited on 22-12-2020
+-- last edited on 28-12-2020
 -- this is used for saving and loading the game
 
 local json = require("json")
@@ -30,7 +30,7 @@ function saveGame(fileName)
 end
 
 function load(fileName)
-  local loadFile = assert(io.open("saves/" .. fileName, "w"))
+  local loadFile = assert(io.open("saves/" .. fileName, "r"))
   io.input(loadFile)
   loadStr = io.read("*all")
   loadObj = json.decode(loadStr)
@@ -45,11 +45,11 @@ end
 function createLoadButtons()
   loadButtons = {}
   loadFileNames = scanForFiles("saves/")
-  for i, buttonName in ipairs(loadFileNames) do
+  for i, fileName in ipairs(loadFileNames) do
     loadButtons[i] = {}
-    loadButtons[i].name = buttonName
+    loadButtons[i].name = fileName:sub(1,-6)
     loadButtons[i].pressAction = function()
-      loadGame(buttonName)
+      loadGame(fileName)
       changeMode("play")
     end
   end

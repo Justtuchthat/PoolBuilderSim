@@ -1,13 +1,13 @@
 -- scrollSelector.lua
 -- created by Justtuchthat
 -- first created on 25-10-2020
--- last edited on 05-11-2020
+-- last edited on 28-12-2020
 -- this is used for creating and drawing a scrollable list
 
 buttonHeight = 18
 
-function newScrollButton(buttonInfo, buttonNo, mode)
-  scrollButton = newButton("text", newLocationObject(0, buttonHeight*buttonNo), buttonInfo.name, {0.8, 0.8, 0.8}, {1, 1, 1})
+function newScrollButton(buttonInfo, buttonNo, loc, mode)
+  scrollButton = newButton("text", newLocationObject(loc.x, loc.y+buttonHeight*buttonNo), buttonInfo.name, {0.8, 0.8, 0.8}, {1, 1, 1})
   scrollButton.pressAction:addFunction(buttonInfo.pressAction)
   return scrollButton
 end
@@ -16,8 +16,7 @@ function newScrollableButtonSelector(selectorList, length, loc, mode)
   local scrollObject = {}
   scrollObject.loc = loc or newLocationObject(0,0);
   for i, selectorItem in ipairs(selectorList) do
-    print("creating button " .. i)
-    scrollObject[i] = newScrollButton(selectorItem, i-1)
+    scrollObject[i] = newScrollButton(selectorItem, i-1, loc, mode)
   end
   scrollObject.isInView = function(self, item)
     item = item - 1
@@ -25,17 +24,19 @@ function newScrollableButtonSelector(selectorList, length, loc, mode)
     return item < self.scrollOffset + self.length
   end
   scrollObject.draw = function(self)
-    love.graphics.translate(self.loc.x, self.loc.y)
     if not self.disabled then
       for i, scrollItem in ipairs(self) do
         scrollItem:draw()
       end
     end
-    love.graphics.translate(-self.loc.x, -self.loc.y)
   end
   scrollObject.checkAllowedToClick = function(self)
     for i, btn in ipairs(self) do
-      btn.disabled = not self:isInView(i)
+      if self:isInView(i) then
+        btn:enable()
+      else
+        btn:disable()
+      end
     end
   end
   scrollObject.mode = mode

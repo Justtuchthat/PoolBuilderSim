@@ -1,13 +1,12 @@
 -- textInputItem.lua
 -- created by Justtuchthat
 -- first created on 19-11-2020
--- last edited on 22-12-2020
+-- last edited on 28-12-2020
 -- this is used as a menu item to get text input
 
 textInputItems = {}
 
 function enterTextFunction(keyboard, mouse)
-  print('test')
   for i, textInputItem in ipairs(textInputItems) do
     if not textInputItem.disabled then
       textInputItem.enterFunction(textInputItem.currentText)

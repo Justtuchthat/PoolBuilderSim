@@ -1,7 +1,7 @@
 -- modeManager.lua
 -- created by Justtuchthat
 -- first created on 11-08-2020
--- last edited on 10-11-2020
+-- last edited on 28-12-2020
 -- this is used to manage all different modes
 
 possibleModes = {}
@@ -19,13 +19,13 @@ function addMode(newMode)
     end
   end
   modes[newMode].enable = function(self)
-    for i = 1, #self.menuItems do
-      self.menuItems[i]:enable()
+    for i, menuItem in ipairs(self.menuItems) do
+      menuItem:enable()
     end
   end
   modes[newMode].disable = function(self)
-    for i = 1, #self.menuItems do
-      self.menuItems[i]:disable()
+    for i, menuItem in ipairs(self.menuItems) do
+      menuItem:disable()
     end
   end
   modes[newMode].draw = {}
