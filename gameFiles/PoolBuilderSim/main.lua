@@ -14,6 +14,6 @@ function love.draw()
 	modeDraw()
 end
 
-function love.update()
-
+function love.update(dt)
+	timeStep(dt)
 end

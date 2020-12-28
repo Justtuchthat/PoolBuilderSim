@@ -26,6 +26,8 @@ end
 
 function saveGame(fileName)
   local gameSave = getSaveableGameworld()
+  gameSave.time = getSaveableTimeObject()
+  gameSave.version = saveVersion
   save(gameSave, fileName)
 end
 
@@ -39,7 +41,11 @@ end
 
 function loadGame(fileName)
   gameLoad = load(fileName)
+  if not saveVersion == gameLoad.saveVersion then
+    assert(false)
+  end
   setSaveableGameworld(gameLoad)
+  setSaveableTimeObject(gameLoad.time)
 end
 
 function createLoadButtons()
