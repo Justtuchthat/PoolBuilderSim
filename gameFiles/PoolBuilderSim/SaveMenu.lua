@@ -1,7 +1,7 @@
 -- saveMenu.lua
 -- created by Justtuchthat
 -- first created on 22-12-2020
--- last edited on 22-12-2020
+-- last edited on 28-12-2020
 -- this is the saving menu
 
 saveNameInput = {}
@@ -40,7 +40,7 @@ end
 function setupSaveMenu()
   setupEscKeybind()
 
-  addMode('saveMenu')
+  addMode('saveMenu', true)
   modes.saveMenu.draw:addFunction(renderGame)
   modes.saveMenu.draw:addFunction(drawSaveMenuOverlay)
 

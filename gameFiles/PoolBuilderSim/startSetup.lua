@@ -1,11 +1,11 @@
 -- setupStart.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 19-11-2020
+-- last edited on 28-12-2020
 -- this is used to start all classes
 
 function setupMainMenu()
-  addMode("mainMenu")
+  addMode("mainMenu", true)
   changeMode("mainMenu")
   width, height, _ = love.window.getMode()
   loadButton = newButton("text", newLocationObject(width/2, height/2 - 10), "load", {1, 1, 1}, {0.2, 0.8, 0.3})
@@ -30,7 +30,7 @@ function startClasses()
   windowSetup()
   startMouse()
 	startButtonClass()
-  addMode("play")
+  addMode("play", false)
 	modes.play.draw:addFunction(renderGame)
 
   setupEscapeMenu()

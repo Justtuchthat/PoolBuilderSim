@@ -1,7 +1,7 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 05-11-2020
+-- last edited on 28-12-2020
 -- this is used to build pools
 
 buildMenuBoxWidth = 110
@@ -145,7 +145,7 @@ function changeBuildTile(newTile)
 end
 
 function setupBuildMode()
-  addMode("build")
+  addMode("build", true)
 
   modes.build.draw:addFunction(renderGame)
   modes.build.draw:addFunction(drawGridLines)

@@ -63,7 +63,7 @@ function createLoadButtons()
 end
 
 function setupLoadMenu()
-  addMode("loadMenu")
+  addMode("loadMenu", true)
   width, height, _ = love.window.getMode()
   loadButtonArray = createLoadButtons()
   newScrollableButtonSelector(loadButtonArray, 10, newLocationObject(100, 100), "loadMenu")

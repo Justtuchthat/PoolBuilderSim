@@ -8,9 +8,14 @@ possibleModes = {}
 modes = {}
 currentMode = ""
 
-function addMode(newMode)
+function addMode(newMode, pausesGame)
+  if contains(possibleModes, newMode) then
+    love.errhand(newMode .. " is an already existing mode so it was not added")
+    love.quit()
+  end
   table.insert(possibleModes, newMode)
   modes[newMode] = {}
+  modes[newMode].pausesGame = pausesGame
   modes[newMode].menuItems = {}
   modes[newMode].menuItems.addMenuItem = function(self, menuItem)
     table.insert(self, menuItem)

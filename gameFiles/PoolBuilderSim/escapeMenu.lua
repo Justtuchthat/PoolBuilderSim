@@ -1,7 +1,7 @@
 -- escapeMenu.lua
 -- created by Justtuchthat
 -- first created on 19-11-2020
--- last edited on 22-12-2020
+-- last edited on 28-12-2020
 -- used for creating the escape menu
 
 saveButtonMode = {}
@@ -21,7 +21,7 @@ local function resizeButtonReplacement(newWidth, newHeight)
 end
 
 function setupEscapeMenu()
-	addMode("escapeMenu")
+	addMode("escapeMenu", true)
   modes.escapeMenu.draw:addFunction(renderGame)
   modes.escapeMenu.draw:addFunction(drawEscapeOverlay)
   width, height, _ = love.window.getMode()

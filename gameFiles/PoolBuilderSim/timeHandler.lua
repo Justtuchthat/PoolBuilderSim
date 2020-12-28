@@ -5,6 +5,7 @@
 -- this is used to handle the time (duh)
 
 function timeStep(dt)
+  if modes[currentMode].pausesGame then return end
   currentTime = currentTime + dt*1000
   if currentTime >= timePerDay then
     currentTime = currentTime - timePerDay
