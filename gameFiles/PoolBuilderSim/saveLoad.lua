@@ -43,8 +43,9 @@ end
 function loadGame(fileName)
   gameLoad = load(fileName)
   setSaveableGameworld(gameLoad)
-  if not gameLoad.saveVersion then
-    love.errhand("previous version was loaded, unkowns set to 0")
+  moneyText:update()
+  if not gameLoad.version then
+    love.errhand("previous version was loaded, unkowns set to 0. These unknows contain Time")
     return
   end
   setSaveableTimeObject(gameLoad.time)
