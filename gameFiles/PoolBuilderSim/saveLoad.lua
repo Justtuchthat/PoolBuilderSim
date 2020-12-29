@@ -1,7 +1,7 @@
 -- saveLoad.lua
 -- created by Justtuchthat
 -- first created on 21-10-2020
--- last edited on 28-12-2020
+-- last edited on 29-12-2020
 -- this is used for saving and loading the game
 
 local json = require("json")
@@ -29,6 +29,7 @@ function saveGame(fileName)
   gameSave.time = getSaveableTimeObject()
   gameSave.version = saveVersion
   save(gameSave, fileName)
+  loadButtons:updateList(createLoadButtons())
 end
 
 function load(fileName)
@@ -41,10 +42,11 @@ end
 
 function loadGame(fileName)
   gameLoad = load(fileName)
-  if not saveVersion == gameLoad.saveVersion then
-    assert(false)
-  end
   setSaveableGameworld(gameLoad)
+  if not gameLoad.saveVersion then
+    love.errhand("previous version was loaded, unkowns set to 0")
+    return
+  end
   setSaveableTimeObject(gameLoad.time)
 end
 
@@ -66,5 +68,5 @@ function setupLoadMenu()
   addMode("loadMenu", true)
   width, height, _ = love.window.getMode()
   loadButtonArray = createLoadButtons()
-  newScrollableButtonSelector(loadButtonArray, 10, newLocationObject(100, 100), "loadMenu")
+  loadButtons = newScrollableButtonSelector(loadButtonArray, 10, newLocationObject(100, 100), "loadMenu")
 end

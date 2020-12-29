@@ -1,7 +1,7 @@
 -- scrollSelector.lua
 -- created by Justtuchthat
 -- first created on 25-10-2020
--- last edited on 28-12-2020
+-- last edited on 29-12-2020
 -- this is used for creating and drawing a scrollable list
 
 buttonHeight = 18
@@ -28,6 +28,14 @@ function newScrollableButtonSelector(selectorList, length, loc, mode)
       for i, scrollItem in ipairs(self) do
         scrollItem:draw()
       end
+    end
+  end
+  scrollObject.updateList = function(self, newList)
+    for i, oldSelectoritem in ipairs(self) do
+      scrollObject[i] = nil
+    end
+    for i, newSelectorItem in ipairs(newList) do
+      scrollObject[i] = newScrollButton(newSelectorItem, i-1, self.loc, self.mode)
     end
   end
   scrollObject.checkAllowedToClick = function(self)
