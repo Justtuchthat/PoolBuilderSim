@@ -1,7 +1,7 @@
 -- currencyHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 14-10-2020
+-- last edited on 29-12-2020
 -- this is used for managing money
 
 buildCost = {}
@@ -12,6 +12,7 @@ money = 1000
 
 function addMoney(additionalMoney)
   money = money + additionalMoney
+  moneyText:update()
   return true
 end
 
@@ -21,6 +22,7 @@ function removeMoney(cost)
     return false
   else
     money = money - cost
+    moneyText:update()
     return true
   end
 end

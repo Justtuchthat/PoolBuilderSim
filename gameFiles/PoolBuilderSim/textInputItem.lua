@@ -1,7 +1,7 @@
 -- textInputItem.lua
 -- created by Justtuchthat
 -- first created on 19-11-2020
--- last edited on 28-12-2020
+-- last edited on 29-12-2020
 -- this is used as a menu item to get text input
 
 textInputItems = {}
@@ -19,7 +19,7 @@ function startTextInputItems()
   Keyboard.enter.firstPressActions:addFunction(enterTextFunction)
 end
 
-function newTextMenuItem(itemLoc, enterFunction, maxLength)
+function newTextInputMenuItem(itemLoc, enterFunction, maxLength)
   textMenuItem = {}
   textMenuItem.maxLength = maxLength or 20
   textMenuItem.loc = itemLoc or {x=0,y=0}

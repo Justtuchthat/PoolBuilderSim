@@ -28,6 +28,7 @@ require("escapeMenu")
 require("saveMenu")
 require("timeHandler")
 require("temperatureHandler")
+require("textMenuItem")
 if testPoolEdgeMode then
 	require("testPoolEdge")
 end

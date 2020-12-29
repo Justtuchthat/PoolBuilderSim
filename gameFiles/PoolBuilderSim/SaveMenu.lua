@@ -1,7 +1,7 @@
 -- saveMenu.lua
 -- created by Justtuchthat
 -- first created on 22-12-2020
--- last edited on 28-12-2020
+-- last edited on 29-12-2020
 -- this is the saving menu
 
 saveNameInput = {}
@@ -45,7 +45,7 @@ function setupSaveMenu()
   modes.saveMenu.draw:addFunction(drawSaveMenuOverlay)
 
   width, height, _ = love.window.getMode()
-  saveNameInput = newTextMenuItem(newLocationObject(width/2,100),saveGameAfterEnter)
+  saveNameInput = newTextInputMenuItem(newLocationObject(width/2,100),saveGameAfterEnter)
   saveText = newButton('text', {x = width/2, y = 120}, 'Press return/enter to save', {1,1,1}, {1,1,1})
   cancelText = newButton('text', {x = width/2, y = 140}, 'Press escape to return', {1,1,1}, {1,1,1})
 
