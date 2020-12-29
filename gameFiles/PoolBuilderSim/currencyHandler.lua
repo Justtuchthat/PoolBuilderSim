@@ -8,7 +8,9 @@ buildCost = {}
 buildCost.grass = 0
 buildCost.pool = 10
 
-money = 1000
+function resetMoney()
+  money = 1000
+end
 
 function addMoney(additionalMoney)
   money = money + additionalMoney
