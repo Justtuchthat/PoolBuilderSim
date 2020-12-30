@@ -1,16 +1,43 @@
 -- saveLoad.lua
 -- created by Justtuchthat
 -- first created on 21-10-2020
--- last edited on 29-12-2020
+-- last edited on 30-12-2020
 -- this is used for saving and loading the game
 
 local json = require("json")
 
 function save(saveObj, fileName)
-  local saveFile = assert(io.open("saves/" .. fileName, "w"))
+  local appdataPath = os.getenv('APPDATA')
+  local saveFile = assert(io.open(appdataPath .. "\\.PoolBuilderSim\\saves\\" .. fileName, "w"))
   io.output(saveFile)
   io.write(json.encode(saveObj))
   io.close(saveFile)
+end
+
+function scanForDirsAndFiles(path)
+  local i, t, popen = 0, {}, io.popen
+  local pfile = popen('dir "'..path..'" /b /a')
+  for filename in pfile:lines() do
+    i = i + 1
+    t[i] = filename
+  end
+  pfile:close()
+  return t
+end
+
+function createPoolBuilderSimAppdataDir()
+  local appdataPath = os.getenv('APPDATA')
+  local currentDirsAndFiles = scanForDirsAndFiles(appdataPath)
+  if not contains(currentDirsAndFiles, ".PoolBuilderSim") then
+    local createPoolBuilderSimDir = "mkdir " .. appdataPath .. "\\.PoolBuilderSim"
+    os.execute(createPoolBuilderSimDir)
+  end
+  appdataPath = appdataPath .. "\\.PoolBuilderSim"
+  currentDirsAndFiles = scanForDirsAndFiles(appdataPath)
+  if not contains(currentDirsAndFiles, "saves") then
+    local createSavesDir = "mkdir " .. appdataPath .. "\\saves"
+    os.execute(createSavesDir)
+  end
 end
 
 function scanForFiles(directory)
@@ -33,7 +60,8 @@ function saveGame(fileName)
 end
 
 function load(fileName)
-  local loadFile = assert(io.open("saves/" .. fileName, "r"))
+  local appdataPath = os.getenv('APPDATA')
+  local loadFile = assert(io.open(appdataPath .. "\\.PoolBuilderSim\\saves\\" .. fileName, "r"))
   io.input(loadFile)
   loadStr = io.read("*all")
   loadObj = json.decode(loadStr)
@@ -53,7 +81,8 @@ end
 
 function createLoadButtons()
   loadButtons = {}
-  loadFileNames = scanForFiles("saves/")
+    local appdataPath = os.getenv('APPDATA')
+  loadFileNames = scanForFiles(appdataPath .. "\\.PoolBuilderSim\\saves")
   for i, fileName in ipairs(loadFileNames) do
     loadButtons[i] = {}
     loadButtons[i].name = fileName:sub(1,-6)
