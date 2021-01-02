@@ -40,7 +40,7 @@ function newScrollableButtonSelector(selectorList, length, loc, mode)
   end
   scrollObject.checkAllowedToClick = function(self)
     for i, btn in ipairs(self) do
-      if self:isInView(i) then
+      if self:isInView(i) and not self.disabled then
         btn:enable()
       else
         btn:disable()
