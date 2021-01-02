@@ -1,7 +1,7 @@
 -- timeHandler.lua
 -- created by Justtuchthat
 -- first created on 28-12-2020
--- last edited on 28-12-2020
+-- last edited on 02-01-2021
 -- this is used to handle the time (duh)
 
 function timeStep(dt)
@@ -21,7 +21,6 @@ function timeStep(dt)
       currentSeason = 1
     end
   end
-  printTime()
 end
 
 function printTime()
