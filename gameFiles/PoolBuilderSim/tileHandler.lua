@@ -29,7 +29,7 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLo
   if canBuild then
     width, _, _ = love.window.getMode()
     tileButton = newButton("text", newLocationObject(width-100, buttonStartingY), name, {1, 1, 1}, {1, 1, 0})
-
+    knownTiles.buildButton = tileButton
     -- sets the current build tile
     tileButton.pressAction:addFunction(function()
       changeBuildTile(name)
@@ -46,7 +46,7 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLo
 
     -- places the button at the right location after resizes
     newResizeFunction(function(newWidth, newHeight)
-      knownTiles[name].loc.x = newWidth - 100
+      knownTiles[name].buildButton.loc.x = newWidth - 100
     end)
     knownTiles[name].buildButton = tileButton
     buttonStartingY = buttonStartingY + 20

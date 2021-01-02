@@ -1,7 +1,7 @@
 -- setupStart.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 29-12-2020
+-- last edited on 02-01-2021
 -- this is used to start all classes
 
 function updateMoneyText(moneyText)
@@ -21,9 +21,9 @@ function setupMainMenu()
   modes.mainMenu.menuItems:addMenuItem(newGameButton)
   newResizeFunction(function(newWidth, newHeight)
     loadButton.loc.x = newWidth/2
-    loadButton.loc.y = neHeight/2 - 10
+    loadButton.loc.y = newHeight/2 - 10
     newGameButton.loc.x = newWidth/2
-    newGameButton.loc.y = neHeight/2 + 10
+    newGameButton.loc.y = newHeight/2 + 10
   end)
   loadButton.pressAction:addFunction(function()
     changeMode("loadMenu")
