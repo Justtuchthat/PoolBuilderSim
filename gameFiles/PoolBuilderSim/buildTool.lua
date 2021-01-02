@@ -1,7 +1,7 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 28-12-2020
+-- last edited on 02-01-2021
 -- this is used to build pools
 
 buildMenuBoxWidth = 110
@@ -26,12 +26,19 @@ end
 
 function buildPoolFinish(_, mouse)
 	if currentMode == "build" and buildLocStart.x and buildLocStart.y then
-		startLoc = newLocationObject(buildLocStart.x, buildLocStart.y)
-		endLoc = screenToWorldSpace(mouse)
-		if (canBuild(startLoc, endLoc)) then
-			buildSquareBuilding(startLoc, endLoc, currentBuildTile, currentBuildCost)
+		if not knownTiles[currentBuildTile].isMulti then
+			startLoc = newLocationObject(buildLocStart.x, buildLocStart.y)
+			endLoc = screenToWorldSpace(mouse)
+			if (canBuild(startLoc, endLoc)) then
+				buildSquareBuilding(startLoc, endLoc, currentBuildTile, currentBuildCost)
+			else
+			end
 		else
-			print("could not build")
+			buildLoc = newLocationObject(buildLocStart.x, buildLocStart.y)
+			if (canMultiBuild(buildLoc)) then
+				buildMultiBuilding(buildLoc, currentBuildTile, currentBuildCost)
+			else
+			end
 		end
 		buildLocStart.x = nil
 		buildLocStart.y = nil
@@ -44,6 +51,15 @@ function canBuild(startLoc, endLoc)
 	for x = startX, endX do
 		for y = startY, endY do
 			if not isInBounds(newLocationObject(x, y)) then return false end
+		end
+	end
+	return currentBuildCost <= money
+end
+
+function canMultiBuild(buildLoc)
+	for i, multiTile in ipairs(knownTiles[currentBuildTile].buildLocations) do
+		if not isInBounds(newLocationObject(buildLoc.x + multiTile.x, buildLoc.y + multiTile.y)) then
+			return false
 		end
 	end
 	return currentBuildCost <= money
@@ -100,9 +116,22 @@ function drawSquareOverlay(startLoc, endLoc)
   love.graphics.translate(-drawOffsetX, -drawOffsetY)
 end
 
-function drawBuildCost(start, End)
-	startX, endX = minMax(start.x, End.x)
-	startY, endY = minMax(start.y, End.y)
+function drawMultiOverlay(buildLoc)
+	love.graphics.translate(drawOffsetX, drawOffsetY)
+	if canMultiBuild(buildLoc) then
+		love.graphics.setColor(0.8, 0.8, 0.1, 0.65)
+	else
+		love.graphics.setColor(0.8, 0.1, 0.1, 0.65)
+	end
+	for i, multiTile in ipairs(knownTiles[currentBuildTile].buildLocations) do
+		local x = buildLoc.x + multiTile.x
+		local y = buildLoc.y + multiTile.y
+		love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
+	end
+	love.graphics.translate(-drawOffsetX, -drawOffsetY)
+end
+
+function drawBuildCost()
 	love.graphics.setColor(0.8, 0.8, 0.1)
 	currentBuildCost = currentBuildCost or 0
 	buildCostText = love.graphics.newText(love.graphics.getFont(), "buildcost: " .. currentBuildCost)
@@ -114,18 +143,25 @@ function recalculateBuildCost(_, mouse)
 		currentBuildCost = 0
 		return
 	end
-	loc = screenToWorldSpace(mouse)
-	startX, endX = minMax(buildLocStart.x, loc.x)
-	startY, endY = minMax(buildLocStart.y, loc.y)
-	currentBuildCost = calculateBuildingCost(startX, startY, endX, endY, currentBuildTile)
+	if not knownTiles[currentBuildTile].isMulti then
+		loc = screenToWorldSpace(mouse)
+		startX, endX = minMax(buildLocStart.x, loc.x)
+		startY, endY = minMax(buildLocStart.y, loc.y)
+		currentBuildCost = calculateBuildingCost(startX, startY, endX, endY, currentBuildTile)
+	else
+		currentBuildCost = calculateMultiBuilddingCost(buildLocStart.x, buildLocStart.y, currentBuildTile)
+	end
 end
 
 function drawBuildSelectionBox()
-  if buildLocStart.x and buildLocStart.y then
+  if not buildLocStart.x or not buildLocStart.y then return end
+	drawBuildCost()
+	if not knownTiles[currentBuildTile].isMulti then
     loc = screenToWorldSpace(mouse)
     drawSquareOverlay(buildLocStart, loc)
-		drawBuildCost(buildLocStart, loc)
-  end
+	else
+		drawMultiOverlay(buildLocStart)
+	end
 end
 
 function relocateButtons(newWidth, newHeight)

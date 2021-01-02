@@ -1,7 +1,7 @@
 -- helperFunctions.lua
 -- created by Justtuchthat
 -- first created on 11-09-2020
--- last edited on 21-10-2020
+-- last edited on 02-01-2021
 -- this file contains all types of random functions
 
 function newLocationObject(x, y)
@@ -43,6 +43,17 @@ function buildSquareBuilding(startLoc, endLoc, type, currentBuildCost)
 		end
 	end
 	checkPoolEdges()
+  insideTest()
+end
+
+function buildMultiBuilding(buildLoc, type, currentBuildCost)
+  _ = (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or removeMoney(currentBuildCost)
+  for i, multiTile in ipairs(knownTiles[type].buildLocations) do
+    x = buildLoc.x + multiTile.x
+    y = buildLoc.y + multiTile.y
+    setTileType(newLocationObject(y, x), type)
+  end
+  checkPoolEdges()
   insideTest()
 end
 

@@ -1,14 +1,14 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 28-12-2020
+-- last edited on 02-01-2021
 -- this is used for managing all tiles
 
 knownTiles = {}
 
 buttonStartingY = 40
 
-function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
+function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLocations)
   if contains(knownTiles, name) then return false end
   if canBuild == nil then canBuild = true end
   table.insert(knownTiles, name)
@@ -17,6 +17,12 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
   knownTiles[name].color = color
   knownTiles[name].buildCost = buildPrice
   knownTiles[name].specialDrawFunction = specialDrawFunction
+  if buildLocations then
+    knownTiles[name].isMulti = true
+    knownTiles[name].buildLocations = buildLocations
+  else
+    knownTiles[name].isMulti = false
+  end
   knownTiles[name].insideSeparator = false
 
   -- creates the button if the player can build this tile type
@@ -95,11 +101,31 @@ function getGameworldSize()
   return gameworldSize
 end
 
+function multiTestDraw(drawLoc)
+  x = drawLoc.x
+  y = drawLoc.y
+  if x == 1 then
+    if y == 1 then
+      love.graphics.setColor({0, 1, 0})
+    else
+      love.graphics.setColor({1, 0, 0})
+    end
+  else
+    if y == 1 then
+      love.graphics.setColor({1, 0, 0})
+    else
+      love.graphics.setColor({0, 1, 0})
+    end
+  end
+  love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
+end
+
 function setupTiles()
   newTile("grass", {0.1, 0.5, 0.05}, 0)
   newTile("foundation", {0.4, 0.4, 0.4}, 5)
   newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
+  newTile("multiTest", {1, 1, 1}, 0, true, multiTestDraw, {{x=0,y=0},{x=0,y=1},{x=1,y=1},{x=1,y=0}})
   knownTiles.wall.insideSeparator = true
 end
