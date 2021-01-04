@@ -81,10 +81,12 @@ end
 function buildMultiBuilding(buildLoc, type, currentBuildCost)
   _ = (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or removeMoney(currentBuildCost)
   for i, multiTile in ipairs(knownTiles[type].buildLocations) do
-    x = buildLoc.x + multiTile.x
-    y = buildLoc.y + multiTile.y
-    setTileType(newLocationObject(y, x), type)
-    setMultiTile(newLocationObject(y,x), knownTiles[type].buildLocations[i].tileNum)
+    loc = newLocationObject(buildLoc.y + multiTile.y, buildLoc.x + multiTile.x)
+    if knownTiles[getTileType(loc)].isMulti then
+      removeMultiBuilding(loc)
+    end
+    setTileType(loc, type)
+    setMultiTile(loc, knownTiles[type].buildLocations[i].tileNum)
   end
   checkPoolEdges()
   insideTest()
