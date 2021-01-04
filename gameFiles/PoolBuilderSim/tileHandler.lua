@@ -21,7 +21,7 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLo
     knownTiles[name].isMulti = true
     knownTiles[name].buildLocations = {}
     for i, multiTile in ipairs(buildLocations) do
-      table.insert(knownTiles[name].buildLocations, {x = multiTile[1], y = multiTile[2], tileNum = multiTile[3]})
+      table.insert(knownTiles[name].buildLocations, {x = multiTile[1], y = multiTile[2], tileNum = i})
     end
   else
     knownTiles[name].isMulti = false
@@ -144,6 +144,6 @@ function setupTiles()
   newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
-  newTile("multiTest", {1, 1, 1}, 0, true, multiTestDraw, {{0,0,0},{0,1,1},{1,1,2},{1,0,3}})
+  newTile("multiTest", {1, 1, 1}, 0, true, multiTestDraw, {{0,0},{0,1},{1,1},{1,0}})
   knownTiles.wall.insideSeparator = true
 end
