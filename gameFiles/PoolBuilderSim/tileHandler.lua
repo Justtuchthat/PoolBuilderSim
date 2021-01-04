@@ -126,13 +126,13 @@ function multiTestDraw(drawLoc)
   x = drawLoc.x
   y = drawLoc.y
   tileNum = getTileMulti(newLocationObject(y, x))
-  if tileNum == 0 then
+  if tileNum == 1 then
     love.graphics.setColor({0,0,0})
-  elseif tileNum == 1 then
-    love.graphics.setColor({0.33,0.33,0.33})
   elseif tileNum == 2 then
-    love.graphics.setColor({0.66,0.66,0.66})
+    love.graphics.setColor({0.33,0.33,0.33})
   elseif tileNum == 3 then
+    love.graphics.setColor({0.66,0.66,0.66})
+  elseif tileNum == 4 then
     love.graphics.setColor({1,1,1})
   end
   love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
@@ -144,6 +144,6 @@ function setupTiles()
   newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
-  newTile("multiTest", {1, 1, 1}, 0, true, multiTestDraw, {{0,0},{0,1},{1,1},{1,0}})
+  newTile("multiTest", {1, 1, 1}, 100, true, multiTestDraw, {{0,0},{0,1},{1,1},{1,0}})
   knownTiles.wall.insideSeparator = true
 end
