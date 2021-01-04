@@ -40,6 +40,7 @@ function buildSquareBuilding(startLoc, endLoc, type, currentBuildCost)
 	for x = beginX, endX do
 		for y = beginY, endY do
 			setTileType(newLocationObject(y,x), type)
+      setSingleTile(newLocationObject(y,x))
 		end
 	end
 	checkPoolEdges()
@@ -52,6 +53,7 @@ function buildMultiBuilding(buildLoc, type, currentBuildCost)
     x = buildLoc.x + multiTile.x
     y = buildLoc.y + multiTile.y
     setTileType(newLocationObject(y, x), type)
+    setMultiTile(newLocationObject(y,x), knownTiles[type].buildLocations[i].tileNum)
   end
   checkPoolEdges()
   insideTest()

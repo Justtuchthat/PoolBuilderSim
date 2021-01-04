@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 02-01-2021
+-- last edited on 04-01-2021
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -19,7 +19,10 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLo
   knownTiles[name].specialDrawFunction = specialDrawFunction
   if buildLocations then
     knownTiles[name].isMulti = true
-    knownTiles[name].buildLocations = buildLocations
+    knownTiles[name].buildLocations = {}
+    for i, multiTile in ipairs(buildLocations) do
+      table.insert(knownTiles[name].buildLocations, {x = multiTile[1], y = multiTile[2], tileNum = multiTile[3]})
+    end
   else
     knownTiles[name].isMulti = false
   end
@@ -65,6 +68,24 @@ function setTileType(loc, newTile)
   end
 end
 
+function setMultiTile(loc, tileNum)
+  if isInBounds(loc) then
+    gameworld[loc.x][loc.y].tileNum = tileNum
+  end
+end
+
+function setSingleTile(loc)
+  if isInBounds(loc) then
+    gameworld[loc.x][loc.y].tileNum = nil
+  end
+end
+
+function getTileMulti(loc)
+  if isInBounds(loc) then
+    return gameworld[loc.x][loc.y].tileNum
+  end
+end
+
 function getTileType(loc)
   if isInBounds(loc) then
     return gameworld[loc.x][loc.y].type
@@ -104,18 +125,15 @@ end
 function multiTestDraw(drawLoc)
   x = drawLoc.x
   y = drawLoc.y
-  if x == 1 then
-    if y == 1 then
-      love.graphics.setColor({0, 1, 0})
-    else
-      love.graphics.setColor({1, 0, 0})
-    end
-  else
-    if y == 1 then
-      love.graphics.setColor({1, 0, 0})
-    else
-      love.graphics.setColor({0, 1, 0})
-    end
+  tileNum = getTileMulti(newLocationObject(y, x))
+  if tileNum == 0 then
+    love.graphics.setColor({0,0,0})
+  elseif tileNum == 1 then
+    love.graphics.setColor({0.33,0.33,0.33})
+  elseif tileNum == 2 then
+    love.graphics.setColor({0.66,0.66,0.66})
+  elseif tileNum == 3 then
+    love.graphics.setColor({1,1,1})
   end
   love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
 end
@@ -126,6 +144,6 @@ function setupTiles()
   newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
-  newTile("multiTest", {1, 1, 1}, 0, true, multiTestDraw, {{x=0,y=0},{x=0,y=1},{x=1,y=1},{x=1,y=0}})
+  newTile("multiTest", {1, 1, 1}, 0, true, multiTestDraw, {{0,0,0},{0,1,1},{1,1,2},{1,0,3}})
   knownTiles.wall.insideSeparator = true
 end
