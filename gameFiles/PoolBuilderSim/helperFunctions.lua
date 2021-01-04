@@ -33,6 +33,7 @@ function contains(table, var)
 end
 
 function removeMultiBuilding(knownLocation)
+  local buildingID = getTileID(knownLocation)
   local locsToCheck = {knownLocation}
   while #locsToCheck > 0 do
     currLoc = locsToCheck[#locsToCheck]
@@ -41,16 +42,16 @@ function removeMultiBuilding(knownLocation)
       if getTileMulti(currLoc) == 1 then
         addMoney(knownTiles[getTileType(currLoc)].buildCost)
       end
-      if getTileMulti({x = currLoc.x, y = currLoc.y+1}) then
+      if getTileMulti({x = currLoc.x, y = currLoc.y+1}) and buildingID == getTileID({x = currLoc.x, y = currLoc.y+1}) then
         table.insert(locsToCheck, {x = currLoc.x, y = currLoc.y+1})
       end
-      if getTileMulti({x = currLoc.x, y = currLoc.y-1}) then
+      if getTileMulti({x = currLoc.x, y = currLoc.y-1}) and buildingID == getTileID({x = currLoc.x, y = currLoc.y-1}) then
         table.insert(locsToCheck, {x = currLoc.x, y = currLoc.y-1})
       end
-      if getTileMulti({x = currLoc.x+1, y = currLoc.y}) then
+      if getTileMulti({x = currLoc.x+1, y = currLoc.y}) and buildingID == getTileID({x = currLoc.x+1, y = currLoc.y}) then
         table.insert(locsToCheck, {x = currLoc.x+1, y = currLoc.y})
       end
-      if getTileMulti({x = currLoc.x-1, y = currLoc.y}) then
+      if getTileMulti({x = currLoc.x-1, y = currLoc.y}) and buildingID == getTileID({x = currLoc.x-1, y = currLoc.y}) then
         table.insert(locsToCheck, {x = currLoc.x-1, y = currLoc.y})
       end
       setTileType(currLoc, "grass")
@@ -78,15 +79,18 @@ function buildSquareBuilding(startLoc, endLoc, type, currentBuildCost)
   insideTest()
 end
 
+local multiBuildingID = 0
+
 function buildMultiBuilding(buildLoc, type, currentBuildCost)
   _ = (currentBuildCost <= 0 and addMoney(-currentBuildCost)) or removeMoney(currentBuildCost)
+  multiBuildingID = multiBuildingID + 1
   for i, multiTile in ipairs(knownTiles[type].buildLocations) do
     loc = newLocationObject(buildLoc.y + multiTile.y, buildLoc.x + multiTile.x)
     if knownTiles[getTileType(loc)].isMulti then
       removeMultiBuilding(loc)
     end
     setTileType(loc, type)
-    setMultiTile(loc, knownTiles[type].buildLocations[i].tileNum)
+    setMultiTile(loc, knownTiles[type].buildLocations[i].tileNum, multiBuildingID)
   end
   checkPoolEdges()
   insideTest()

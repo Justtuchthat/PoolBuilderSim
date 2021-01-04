@@ -59,6 +59,9 @@ end
 
 function tilePrice(x, y)
   tileType = gameworld[x][y].type
+  if knownTiles[tileType].isMulti then
+    return 0
+  end
   return knownTiles[tileType].buildCost
 end
 
@@ -68,21 +71,29 @@ function setTileType(loc, newTile)
   end
 end
 
-function setMultiTile(loc, tileNum)
+function setMultiTile(loc, tileNum, buildingID)
   if isInBounds(loc) then
     gameworld[loc.x][loc.y].tileNum = tileNum
+    gameworld[loc.x][loc.y].buildingID = buildingID
   end
 end
 
 function setSingleTile(loc)
   if isInBounds(loc) then
     gameworld[loc.x][loc.y].tileNum = nil
+    gameworld[loc.x][loc.y].buildingID = nil
   end
 end
 
 function getTileMulti(loc)
   if isInBounds(loc) then
     return gameworld[loc.x][loc.y].tileNum
+  end
+end
+
+function getTileID(loc)
+  if isInBounds(loc) then
+    return gameworld[loc.x][loc.y].buildingID
   end
 end
 
