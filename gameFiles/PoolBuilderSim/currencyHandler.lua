@@ -1,7 +1,7 @@
 -- currencyHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 04-01-2021
+-- last edited on 13-01-2021
 -- this is used for managing money
 
 buildCost = {}
@@ -27,6 +27,11 @@ function removeMoney(cost)
     moneyText:update()
     return true
   end
+end
+
+function setMoney(newMoney)
+  money = newMoney
+  moneyText:update()
 end
 
 function calculateBuildingCost(beginPointX, beginPointY, endPointX, endPointY, buildTile)

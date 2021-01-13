@@ -1,7 +1,7 @@
 -- globalVariables.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 29-12-2020
+-- last edited on 13-01-2020
 -- this is used to import all global variables
 -- this is done to clean up the main file
 
@@ -19,7 +19,7 @@ buildLocStart = {}
 buildLocStart.x = nil
 buildLocStart.y = nil
 
-saveVersion = 0.1
+saveVersion = 0.2
 
 currentTime = 0
 currentDay = 0
@@ -46,7 +46,7 @@ function resetGlobalVariables()
   buildLocStart.x = nil
   buildLocStart.y = nil
 
-  saveVersion = 0.1
+  saveVersion = 0.2
 
   currentTime = 0
   currentDay = 0

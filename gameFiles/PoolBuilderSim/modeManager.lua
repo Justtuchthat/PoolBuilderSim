@@ -1,7 +1,7 @@
 -- modeManager.lua
 -- created by Justtuchthat
 -- first created on 11-08-2020
--- last edited on 28-12-2020
+-- last edited on 13-01-2020
 -- this is used to manage all different modes
 
 possibleModes = {}
@@ -47,7 +47,6 @@ function changeMode(newMode)
     end
     currentMode = newMode
     modes[currentMode]:enable()
-    print("changed to " .. newMode)
   else
     love.errhand(newMode .. " is not a supported mode")
   end

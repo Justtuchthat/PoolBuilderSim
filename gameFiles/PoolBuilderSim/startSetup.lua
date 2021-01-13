@@ -1,11 +1,10 @@
 -- setupStart.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 02-01-2021
+-- last edited on 13-01-2021
 -- this is used to start all classes
 
 function updateMoneyText(moneyText)
-  print("setting new money")
   moneyText.text = "Currency: " .. money
 end
 
