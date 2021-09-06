@@ -1,7 +1,7 @@
 -- buttonClass.lua
 -- created by Justtuchthat
 -- first created on 10-09-2020
--- last edited on 28-12-2020
+-- last edited on 06-09-2021
 -- this is the class that will contain all buttons
 
 allButtons = {}
@@ -73,7 +73,7 @@ local function mousePressForButtons(Keyboard, mouse)
   end
 end
 
-local function hoverOverColorHandler(Keyboard, mouse)
+function hoverOverColorHandler(Keyboard, mouse)
   for i, btn in ipairs(allButtons) do
     btn.color = btn.colorNormal
     if (not btn.disabled) and btn:hasCursorInside(mouse) then

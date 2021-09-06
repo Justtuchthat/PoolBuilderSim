@@ -1,7 +1,7 @@
 -- movementSetup.lua
 -- created by Justtuchthat
 -- first created on 16-08-2020
--- last edited on 19-11-2020
+-- last edited on 06-09-2021
 -- this is used to setup all the keys for movement
 
 local function mouseWheelMove(keyboard, mouse)
@@ -9,6 +9,7 @@ local function mouseWheelMove(keyboard, mouse)
 		if Keyboard.lshift.pressed then
 			drawOffsetX = drawOffsetX - mouse.wheel.y*movementSpeed
 		else
+			drawOffsetX = drawOffsetX - mouse.wheel.x*movementSpeed
 			drawOffsetY = drawOffsetY + mouse.wheel.y*movementSpeed
 		end
 	end
@@ -47,6 +48,12 @@ local function moveDown()
 	end
 end
 
+local function enterBuildModeWhenBPressed()
+	if currentMode == "play" then
+		enterBuildMode()
+	end
+end
+
 local function openEscapeMenu()
 	if currentMode == "play" then
 		changeMode("escapeMenu")
@@ -64,6 +71,7 @@ local function addKeyListeners()
 	Keyboard:addKeyListener('a')
 	Keyboard:addKeyListener('s')
 	Keyboard:addKeyListener('d')
+	Keyboard:addKeyListener('b')
 	Keyboard:addKeyListener('up')
 	Keyboard:addKeyListener('left')
 	Keyboard:addKeyListener('down')
@@ -81,6 +89,7 @@ local function connectKeysWithFunctions()
 	Keyboard.s.continuePressActions:addFunction(moveDown)
 	Keyboard.d.firstPressActions:addFunction(moveRight)
 	Keyboard.d.continuePressActions:addFunction(moveRight)
+	Keyboard.b.firstPressActions:addFunction(enterBuildModeWhenBPressed)
 	Keyboard.up.firstPressActions:addFunction(moveUp)
 	Keyboard.up.continuePressActions:addFunction(moveUp)
 	Keyboard.left.firstPressActions:addFunction(moveLeft)
