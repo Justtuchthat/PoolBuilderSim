@@ -1,12 +1,8 @@
 -- currencyHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 13-01-2021
+-- last edited on 19-10-2021
 -- this is used for managing money
-
-buildCost = {}
-buildCost.grass = 0
-buildCost.pool = 10
 
 function resetMoney()
   money = 1000
