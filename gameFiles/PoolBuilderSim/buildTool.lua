@@ -1,7 +1,7 @@
 -- buildTool.lua
 -- created by Justtuchthat
 -- first created on 05-10-2020
--- last edited on 02-01-2021
+-- last edited on 06-09-2021
 -- this is used to build pools
 
 buildMenuBoxWidth = 110
@@ -172,6 +172,13 @@ function resetColors()
 	for i, tileName in ipairs(knownTiles) do
 		if knownTiles[tileName].buildButton then
 			knownTiles[tileName].buildButton.colorNormal = {1,1,1}
+			knownTiles[tileName].buildButton.color = {1,1,1}
+		end
+	end
+	hoverOverColorHandler(Keyboard, mouse)
+	for i, tileName in ipairs(knownTiles) do
+		if knownTiles[tileName].buildButton then
+			knownTiles[tileName].buildButton:draw()
 		end
 	end
 end
