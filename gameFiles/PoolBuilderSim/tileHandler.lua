@@ -1,7 +1,7 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 13-01-2021
+-- last edited on 19-10-2021
 -- this is used for managing all tiles
 
 knownTiles = {}
@@ -42,6 +42,7 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLo
     tileButton.pressAction:addFunction(resetColors)
     tileButton.pressAction:addFunction(function()
       knownTiles[name].buildButton.colorNormal = {0.2, 0.8, 0.1}
+      knownTiles[name].buildButton.hoverOverColor = {0.8, 0.9, 0.1}
     end)
 
     -- adds the button to the build menu
