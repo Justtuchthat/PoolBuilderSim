@@ -1,14 +1,14 @@
 -- tileHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 19-10-2021
+-- last edited on 10-12-2021
 -- this is used for managing all tiles
 
 knownTiles = {}
 
 buttonStartingY = 40
 
-function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLocations)
+function newTile(name, color, buildPrice, canBuild, specialDrawFunction)
   if contains(knownTiles, name) then return false end
   if canBuild == nil then canBuild = true end
   table.insert(knownTiles, name)
@@ -17,15 +17,6 @@ function newTile(name, color, buildPrice, canBuild, specialDrawFunction, buildLo
   knownTiles[name].color = color
   knownTiles[name].buildCost = buildPrice
   knownTiles[name].specialDrawFunction = specialDrawFunction
-  if buildLocations then
-    knownTiles[name].isMulti = true
-    knownTiles[name].buildLocations = {}
-    for i, multiTile in ipairs(buildLocations) do
-      table.insert(knownTiles[name].buildLocations, {x = multiTile[1], y = multiTile[2], tileNum = i})
-    end
-  else
-    knownTiles[name].isMulti = false
-  end
   knownTiles[name].insideSeparator = false
 
   -- creates the button if the player can build this tile type
@@ -60,41 +51,12 @@ end
 
 function tilePrice(x, y)
   tileType = gameworld[x][y].type
-  if knownTiles[tileType].isMulti then
-    return 0
-  end
   return knownTiles[tileType].buildCost
 end
 
 function setTileType(loc, newTile)
   if isInBounds(loc) and contains(knownTiles, newTile) then
     gameworld[loc.x][loc.y].type = newTile
-  end
-end
-
-function setMultiTile(loc, tileNum, buildingID)
-  if isInBounds(loc) then
-    gameworld[loc.x][loc.y].tileNum = tileNum
-    gameworld[loc.x][loc.y].buildingID = buildingID
-  end
-end
-
-function setSingleTile(loc)
-  if isInBounds(loc) then
-    gameworld[loc.x][loc.y].tileNum = nil
-    gameworld[loc.x][loc.y].buildingID = nil
-  end
-end
-
-function getTileMulti(loc)
-  if isInBounds(loc) then
-    return gameworld[loc.x][loc.y].tileNum
-  end
-end
-
-function getTileID(loc)
-  if isInBounds(loc) then
-    return gameworld[loc.x][loc.y].buildingID
   end
 end
 
@@ -134,28 +96,11 @@ function getGameworldSize()
   return gameworldSize
 end
 
-function multiTestDraw(drawLoc)
-  x = drawLoc.x
-  y = drawLoc.y
-  tileNum = getTileMulti(newLocationObject(y, x))
-  if tileNum == 1 then
-    love.graphics.setColor({0,0,0})
-  elseif tileNum == 2 then
-    love.graphics.setColor({0.33,0.33,0.33})
-  elseif tileNum == 3 then
-    love.graphics.setColor({0.66,0.66,0.66})
-  elseif tileNum == 4 then
-    love.graphics.setColor({1,1,1})
-  end
-  love.graphics.rectangle("fill", x*squareSize, y*squareSize, squareSize, squareSize)
-end
-
 function setupTiles()
   newTile("grass", {0.1, 0.5, 0.05}, 0)
   newTile("foundation", {0.4, 0.4, 0.4}, 5)
   newTile("pool", {0, 0, 1}, 10)
   newTile("poolEdge", {0.4, 0.4, 0.4}, 10, false, drawPoolEdge)
   newTile("wall", {0.6, 0.2, 0.2}, 2)
-  newTile("multiTest", {1, 1, 1}, 100, true, multiTestDraw, {{0,0},{0,1},{1,1},{1,0}})
   knownTiles.wall.insideSeparator = true
 end

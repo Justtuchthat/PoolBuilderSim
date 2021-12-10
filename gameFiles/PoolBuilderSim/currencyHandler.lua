@@ -1,7 +1,7 @@
 -- currencyHandler.lua
 -- created by Justtuchthat
 -- first created on 09-10-2020
--- last edited on 19-10-2021
+-- last edited on 10-12-2021
 -- this is used for managing money
 
 function resetMoney()
@@ -39,16 +39,5 @@ function calculateBuildingCost(beginPointX, beginPointY, endPointX, endPointY, b
       buildCost = buildCost + knownTiles[buildTile].buildCost
     end
   end
-  return buildCost
-end
-
-function calculateMultiBuilddingCost(buildLocStartX, buildLocStartY, buildTile)
-  buildCost = 0
-  for i, multiTile in ipairs(knownTiles[buildTile].buildLocations) do
-    buildTileLoc = newLocationObject(buildLocStartX + multiTile.x, buildLocStartY + multiTile.y)
-    if not isInBounds(buildTileLoc) then return 0 end
-    buildCost = buildCost - tilePrice(buildTileLoc.x, buildTileLoc.y)
-  end
-  buildCost = buildCost + knownTiles[buildTile].buildCost
   return buildCost
 end
